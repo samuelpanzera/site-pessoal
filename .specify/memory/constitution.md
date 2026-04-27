@@ -1,50 +1,51 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- 
+Sync Impact Report:
+- Version change: 0.0.0 -> 1.0.0
+- Modified principles:
+  - Added Monorepo Architecture
+  - Added Frontend Stack
+  - Added Backend Stack
+  - Added Design-Driven Development
+  - Added Interactive Experience
+- Added sections: Technology Requirements & Aesthetics, Development Workflow
+- Templates requiring updates: 
+  - .specify/templates/plan-template.md (⚠ pending)
+  - .specify/templates/spec-template.md (⚠ pending)
+  - .specify/templates/tasks-template.md (⚠ pending)
+- Follow-up TODOs: none
+-->
+
+# PDI Pessoal Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Monorepo Architecture
+Use an ultra-fast monorepo structure. Ensure all frontend, backend, and shared libraries are housed within a single repository for streamlined development and testing.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Frontend Stack
+Use Vite with React and Tailwind CSS for the frontend to achieve high performance and modern aesthetics, ensuring a 'void', cyber-atmospheric, dark theme.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Backend Stack
+Use Golang for the backend. Services should be extremely fast, robust, and handle API demands for the portfolio efficiently.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Design-Driven Development
+Follow the design specified in `designs/desgin-pdi.pen` using the pen.dev MCP. Emphasize a 'void' aesthetic with 'pulsing' luminosity and high-tech minimalist style. No placeholders; demonstrate functionality via the provided design system.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Interactive Experience
+Focus on creating an impressive first page portfolio with dynamic software architecture animations in the hero section and smooth transitions between screens.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology Requirements & Aesthetics
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- **Frontend:** React, Vite, Tailwind CSS.
+- **Backend:** Golang.
+- **Design Aesthetics:** Obsidian Pulse palette (Deep black `#000000` canvas, `#4b0082` primary accents, `#1C243A` secondary surfaces). Use Space Grotesk and Manrope typography. Glow effects, minimalist lines, and premium responsive animations.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+All UI development must reference the `desgin-pdi.pen` definitions for components (cards, chips, input fields). Features should be built as self-contained within the monorepo.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+All UI additions must strictly adhere to the defined color palette and typography. Backend APIs must be clearly typed and documented. Performance regressions in the Vite build or Golang services are unacceptable. All pull requests must verify compliance with this constitution.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-04-27 | **Last Amended**: 2026-04-27
