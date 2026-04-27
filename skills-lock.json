@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "animejs": {
+      "source": "freshtechbro/claudedesignskills",
+      "sourceType": "github",
+      "computedHash": "e955f02951e1484e81d827e0092a6b5ddca5ac593a96d51cc9f6c606ecb49cb0"
+    }
+  }
+}
