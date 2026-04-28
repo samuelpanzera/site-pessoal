@@ -1,0 +1,30 @@
+# Bun
+node_modules/
+bun.lockb
+
+# Node.js
+dist/
+build/
+*.log
+.env*
+coverage/
+
+# Go
+*.exe
+*.test
+vendor/
+*.out
+apps/backend/bin/
+
+# Turborepo
+.turbo/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Misc
+*.tmp
+*.swp

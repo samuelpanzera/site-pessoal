@@ -20,13 +20,13 @@ Sync Impact Report:
 ## Core Principles
 
 ### I. Monorepo Architecture
-Use an ultra-fast monorepo structure. Ensure all frontend, backend, and shared libraries are housed within a single repository for streamlined development and testing.
+- **I. Arquitetura Monorepo**: Frontend, backend e bibliotecas compartilhadas residirão em um único repositório para facilitar a consistência e velocidade de desenvolvimento.
 
 ### II. Frontend Stack
-Use Vite with React and Tailwind CSS for the frontend to achieve high performance and modern aesthetics, ensuring a 'void', cyber-atmospheric, dark theme.
+- **II. Stack Frontend (Bun + Vite + React + Tailwind)**: O frontend será construído com React e Vite, utilizando o **Bun** como runtime e gerenciador de pacotes. O design deve seguir estritamente o tema "void" (Obsidian Pulse).
 
 ### III. Backend Stack
-Use Golang for the backend. Services should be extremely fast, robust, and handle API demands for the portfolio efficiently.
+- **III. Stack Backend (Golang)**: O backend será desenvolvido em Go para garantir máxima performance e baixo consumo de recursos.
 
 ### IV. Design-Driven Development
 Follow the design specified in `designs/desgin-pdi.pen` using the pen.dev MCP. Emphasize a 'void' aesthetic with 'pulsing' luminosity and high-tech minimalist style. No placeholders; demonstrate functionality via the provided design system.
