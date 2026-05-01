@@ -8,6 +8,7 @@ import PDISection from './components/PDISection'
 import MockAuth from './components/MockAuth'
 import Footer from './components/Footer'
 import Divider from './components/Divider'
+import ArchitectureBackground from './components/ArchitectureBackground'
 import './App.css'
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-on-background selection:bg-primary/30">
+    <div className="min-h-screen text-on-background selection:bg-primary/30">
+      <ArchitectureBackground />
       <Navigation onAccessClick={handleAccessClick} />
       <main>
         <Hero />
