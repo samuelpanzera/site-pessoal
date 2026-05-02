@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface MockAuthProps {
   isOpen: boolean;
@@ -7,13 +8,10 @@ interface MockAuthProps {
 
 const MockAuth: React.FC<MockAuthProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(0);
-  const messages = [
-    "Contacting Google Auth Servers...",
-    "Verifying system permissions...",
-    "Checking channel membership status...",
-    "Establishing secure encrypted tunnel...",
-    "Finalizing PDI handshake..."
-  ];
+  const { t } = useTranslation();
+  
+  // Get messages from translation, ensuring it's an array
+  const messages = t('mock_auth.messages', { returnObjects: true }) as string[];
 
   useEffect(() => {
     if (!isOpen) {
@@ -30,11 +28,11 @@ const MockAuth: React.FC<MockAuthProps> = ({ isOpen, onClose }) => {
       // Auto close or redirect here
       const timer = setTimeout(() => {
         onClose();
-        alert("Access Granted: This is a prototype. In production, you would be redirected to the PDI Dashboard.");
+        alert(t('mock_auth.alert'));
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, step, onClose]);
+  }, [isOpen, step, onClose, messages, t]);
 
   if (!isOpen) return null;
 
@@ -50,7 +48,7 @@ const MockAuth: React.FC<MockAuthProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-xl font-space-grotesk font-bold">Authentication in Progress</h3>
+          <h3 className="text-xl font-space-grotesk font-bold">{t('mock_auth.title')}</h3>
           <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
             <div 
               className="h-full bg-primary transition-all duration-1000 ease-linear"
@@ -58,7 +56,7 @@ const MockAuth: React.FC<MockAuthProps> = ({ isOpen, onClose }) => {
             />
           </div>
           <p className="text-sm font-mono text-primary animate-pulse">
-            {step < messages.length ? `[RUN] ${messages[step]}` : "[DONE] Success"}
+            {step < messages.length ? `[RUN] ${messages[step]}` : t('mock_auth.success')}
           </p>
         </div>
 
@@ -66,7 +64,7 @@ const MockAuth: React.FC<MockAuthProps> = ({ isOpen, onClose }) => {
           onClick={onClose}
           className="text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors"
         >
-          Cancel Operation
+          {t('mock_auth.cancel')}
         </button>
       </div>
     </div>

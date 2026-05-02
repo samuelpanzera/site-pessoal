@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface LogEntry {
   id: string;
@@ -8,7 +9,8 @@ interface LogEntry {
 }
 
 const LogItem: React.FC<LogEntry> = ({ date, title, description }) => {
-  const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
+  const { i18n } = useTranslation();
+  const formattedDate = new Date(date).toLocaleDateString(i18n.language === 'pt' ? 'pt-BR' : 'en-US', {
     day: '2-digit',
     month: 'short',
     hour: '2-digit',
@@ -41,13 +43,14 @@ const LogItem: React.FC<LogEntry> = ({ date, title, description }) => {
 const ExecutionLog: React.FC = () => {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     fetch('http://localhost:8080/api/logs')
       .then((res) => res.json())
       .then((data) => {
         setLogs(data);
-        setLoading(false);
+        setLoading(false)
       })
       .catch((err) => {
         console.error('Failed to fetch logs:', err);
@@ -60,19 +63,18 @@ const ExecutionLog: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-8">
         <div className="space-y-4">
           <h2 className="text-4xl font-space-grotesk font-bold tracking-tight">
-            Execution <span className="text-primary-container">Log</span>
+            {t('execution_log.title')} <span className="text-primary-container">{t('execution_log.title_highlight')}</span>
           </h2>
           <p className="max-w-xl text-on-surface-variant">
-            A real-time terminal of system updates, feature deployments, and 
-            architectural evolutions.
+            {t('execution_log.description')}
           </p>
         </div>
         <div className="text-right">
           <div className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">
-            System Clock
+            {t('execution_log.clock_label')}
           </div>
           <div className="font-space-grotesk text-xl font-bold text-primary tabular-nums">
-            {new Date().toLocaleTimeString('pt-BR', { hour12: false })}
+            {new Date().toLocaleTimeString(i18n.language === 'pt' ? 'pt-BR' : 'en-US', { hour12: false })}
           </div>
         </div>
       </div>
@@ -83,7 +85,7 @@ const ExecutionLog: React.FC = () => {
         
         {loading ? (
           <div className="py-20 text-center text-on-surface-variant animate-pulse font-mono text-sm">
-            [WAIT] Fetching system logs...
+            {t('execution_log.loading')}
           </div>
         ) : (
           <div className="relative">

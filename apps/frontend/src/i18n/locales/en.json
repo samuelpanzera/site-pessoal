@@ -3,7 +3,9 @@
     "home": "Home",
     "projects": "Projects",
     "contact": "Contact",
-    "pdi_access": "PDI Access"
+    "pdi_access": "PDI Access",
+    "tech_stack": "Tech Stack",
+    "execution_log": "Execution Log"
   },
   "hero": {
     "title": "Architecting <1/> <2>Reliable</2> Backends",
@@ -32,6 +34,64 @@
         "title": "Learning",
         "desc": "< 1 year, actively studying"
       }
+    }
+  },
+  "projects": {
+    "title": "System",
+    "title_highlight": "Architectures",
+    "description": "A collection of projects demonstrating modular logic, high-concurrency handling, and distributed system design.",
+    "loading": "Loading System Records...",
+    "explore": "Explore System"
+  },
+  "execution_log": {
+    "title": "Execution",
+    "title_highlight": "Log",
+    "description": "A real-time terminal of system updates, feature deployments, and architectural evolutions.",
+    "clock_label": "System Clock",
+    "loading": "[WAIT] Fetching system logs..."
+  },
+  "pdi": {
+    "restricted_area": "Restricted Area",
+    "title": "Personal Development",
+    "title_highlight": "System (PDI)",
+    "description": "Access the restricted dashboard to track career milestones, learning objectives, and technical evolution logs. Authorized members only.",
+    "authenticate": "Authenticate with Google"
+  },
+  "footer": {
+    "description": "Architecting the future of distributed systems through precision, performance, and minimal overhead. A back-end perspective on software engineering.",
+    "navigation": "Navigation",
+    "connectivity": "Connectivity",
+    "oled_friendly": "OLED FRIENDLY",
+    "system_ready": "SYSTEM READY",
+    "version": "DEV_VOID PORTFOLIO V1.0.0"
+  },
+  "mock_auth": {
+    "title": "Authentication in Progress",
+    "cancel": "Cancel Operation",
+    "success": "[DONE] Success",
+    "messages": [
+      "Contacting Google Auth Servers...",
+      "Verifying system permissions...",
+      "Checking channel membership status...",
+      "Establishing secure encrypted tunnel...",
+      "Finalizing PDI handshake..."
+    ],
+    "alert": "Access Granted: This is a prototype. In production, you would be redirected to the PDI Dashboard."
+  },
+  "arch": {
+    "labels": {
+      "client": "Client",
+      "gateway": "API Gateway",
+      "api": "REST API",
+      "lambda": "Lambda",
+      "server_a": "Backend A",
+      "server_b": "Backend B",
+      "rabbitmq": "RabbitMQ",
+      "postgres": "PostgreSQL",
+      "redis": "Redis",
+      "docker": "Docker",
+      "k8s": "Kubernetes",
+      "aws": "AWS Cloud"
     }
   }
 }

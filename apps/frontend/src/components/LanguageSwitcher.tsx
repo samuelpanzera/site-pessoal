@@ -111,7 +111,7 @@ export const LanguageSwitcher: React.FC = () => {
         onKeyDown={(e) => handleKeyDown(e)}
         aria-haspopup="true"
         aria-expanded={isOpen}
-        aria-label="Select Language"
+        aria-label={i18n.language === 'pt' ? 'Selecionar Idioma' : 'Select Language'}
       >
         <selectedLang.Icon className="w-4 h-4 rounded-sm" />
         <span>{selectedLang.label}</span>

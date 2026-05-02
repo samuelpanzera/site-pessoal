@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface PDISectionProps {
   onAccessClick: () => void;
 }
 
 const PDISection: React.FC<PDISectionProps> = ({ onAccessClick }) => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-32 px-6 max-w-7xl mx-auto">
       <div className="relative p-12 md:p-20 rounded-3xl bg-primary-container overflow-hidden group">
@@ -16,24 +19,23 @@ const PDISection: React.FC<PDISectionProps> = ({ onAccessClick }) => {
             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
             </svg>
-            Restricted Area
+            {t('pdi.restricted_area')}
           </div>
           
           <h2 className="text-5xl font-space-grotesk font-bold tracking-tight text-white leading-tight">
-            Personal Development <br />
-            <span className="opacity-60">System (PDI)</span>
+            {t('pdi.title')} <br />
+            <span className="opacity-60">{t('pdi.title_highlight')}</span>
           </h2>
           
           <p className="text-white/70 text-lg leading-relaxed">
-            Access the restricted dashboard to track career milestones, learning 
-            objectives, and technical evolution logs. Authorized members only.
+            {t('pdi.description')}
           </p>
           
           <button 
             onClick={onAccessClick}
             className="flex items-center gap-4 px-8 py-4 rounded-xl bg-white text-primary-container font-bold hover:gap-6 transition-all shadow-xl"
           >
-            Authenticate with Google
+            {t('pdi.authenticate')}
             <span className="text-xl">→</span>
           </button>
         </div>

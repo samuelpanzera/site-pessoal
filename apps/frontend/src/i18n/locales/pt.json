@@ -3,7 +3,9 @@
     "home": "Início",
     "projects": "Projetos",
     "contact": "Contato",
-    "pdi_access": "PDI Access"
+    "pdi_access": "PDI Access",
+    "tech_stack": "Stack Técnica",
+    "execution_log": "Log de Execução"
   },
   "hero": {
     "title": "Arquitetando <1/> Backends <2>Confiáveis</2>",
@@ -17,21 +19,79 @@
     "description": "Desenvolvo com foco em velocidade e escalabilidade. Minha stack é escolhida por precisão, confiabilidade e a capacidade de lidar com lógica complexa com sobrecarga mínima.",
     "criteria": {
       "expert": {
-        "title": "Expert",
+        "title": "Especialista",
         "desc": "4+ anos, produção e liderança técnica"
       },
       "proficient": {
-        "title": "Proficient",
+        "title": "Proficiente",
         "desc": "2–4 anos, uso consistente em projetos reais"
       },
       "intermediate": {
-        "title": "Intermediate",
+        "title": "Intermediário",
         "desc": "1–2 anos, projetos profissionais/pessoais"
       },
       "learning": {
-        "title": "Learning",
+        "title": "Aprendendo",
         "desc": "< 1 ano, estudando ativamente"
       }
+    }
+  },
+  "projects": {
+    "title": "Arquiteturas",
+    "title_highlight": "de Sistema",
+    "description": "Uma coleção de projetos demonstrando lógica modular, manipulação de alta concorrência e design de sistemas distribuídos.",
+    "loading": "Carregando Registros do Sistema...",
+    "explore": "Explorar Sistema"
+  },
+  "execution_log": {
+    "title": "Log de",
+    "title_highlight": "Execução",
+    "description": "Um terminal em tempo real de atualizações do sistema, implantações de recursos e evoluções arquiteturais.",
+    "clock_label": "Relógio do Sistema",
+    "loading": "[AGUARDE] Buscando logs do sistema..."
+  },
+  "pdi": {
+    "restricted_area": "Área Restrita",
+    "title": "Sistema de Desenvolvimento",
+    "title_highlight": "Pessoal (PDI)",
+    "description": "Acesse o dashboard restrito para acompanhar marcos de carreira, objetivos de aprendizado e logs de evolução técnica. Apenas membros autorizados.",
+    "authenticate": "Autenticar com Google"
+  },
+  "footer": {
+    "description": "Arquitetando o futuro de sistemas distribuídos através de precisão, performance e sobrecarga mínima. Uma perspectiva back-end sobre engenharia de software.",
+    "navigation": "Navegação",
+    "connectivity": "Conectividade",
+    "oled_friendly": "OLED FRIENDLY",
+    "system_ready": "SISTEMA PRONTO",
+    "version": "DEV_VOID PORTFOLIO V1.0.0"
+  },
+  "mock_auth": {
+    "title": "Autenticação em Progresso",
+    "cancel": "Cancelar Operação",
+    "success": "[OK] Sucesso",
+    "messages": [
+      "Contatando Servidores Google Auth...",
+      "Verificando permissões do sistema...",
+      "Checando status de membro do canal...",
+      "Estabelecendo túnel seguro criptografado...",
+      "Finalizando handshake do PDI..."
+    ],
+    "alert": "Acesso Concedido: Este é um protótipo. Em produção, você seria redirecionado para o Dashboard do PDI."
+  },
+  "arch": {
+    "labels": {
+      "client": "Cliente",
+      "gateway": "API Gateway",
+      "api": "REST API",
+      "lambda": "Lambda",
+      "server_a": "Backend A",
+      "server_b": "Backend B",
+      "rabbitmq": "RabbitMQ",
+      "postgres": "PostgreSQL",
+      "redis": "Redis",
+      "docker": "Docker",
+      "k8s": "Kubernetes",
+      "aws": "AWS Cloud"
     }
   }
 }

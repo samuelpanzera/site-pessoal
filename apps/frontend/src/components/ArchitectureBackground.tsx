@@ -1,10 +1,12 @@
-import { useEffect, useState, useCallback, useRef, memo, type ReactElement } from 'react';
+import { useEffect, useState, useCallback, useRef, memo, type ReactElement, useMemo } from 'react';
 import { motion, useMotionValue, useMotionTemplate, useReducedMotion, useTransform, useSpring } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface ArchNode {
   id: string;
-  label: string;
+  labelKey: string;
+  label?: string;
   x: number;
   y: number;
   icon: string;
@@ -154,19 +156,19 @@ const ICONS: Record<string, ReactElement> = {
 };
 
 // ─── Architecture Layout ────────────────────────────────────────────────────
-const NODES: ArchNode[] = [
-  { id: 'client',    label: 'Client',       x: 140,  y: 110, icon: 'web' },
-  { id: 'gateway',   label: 'API Gateway',  x: 420,  y: 110, icon: 'gateway' },
-  { id: 'api',       label: 'REST API',     x: 700,  y: 110, icon: 'api' },
-  { id: 'lambda',    label: 'Lambda',       x: 650,  y: 520, icon: 'lambda' },
-  { id: 'server1',   label: 'Backend A',    x: 950,  y: 110, icon: 'server', canFail: true },
-  { id: 'server2',   label: 'Backend B',    x: 920,  y: 520, icon: 'server' },
-  { id: 'rabbitmq',  label: 'RabbitMQ',     x: 1190, y: 190, icon: 'rabbitmq' },
-  { id: 'postgres',  label: 'PostgreSQL',   x: 1190, y: 400, icon: 'database' },
-  { id: 'redis',     label: 'Redis',        x: 950,  y: 300, icon: 'redis', canFail: true },
-  { id: 'docker',    label: 'Docker',       x: 400,  y: 520, icon: 'docker' },
-  { id: 'k8s',       label: 'Kubernetes',   x: 100,  y: 350, icon: 'kubernetes' },
-  { id: 'aws',       label: 'AWS Cloud',    x: 200,  y: 520, icon: 'aws' },
+const NODES_DATA: ArchNode[] = [
+  { id: 'client',    labelKey: 'client',       x: 140,  y: 110, icon: 'web' },
+  { id: 'gateway',   labelKey: 'gateway',      x: 420,  y: 110, icon: 'gateway' },
+  { id: 'api',       labelKey: 'api',          x: 700,  y: 110, icon: 'api' },
+  { id: 'lambda',    labelKey: 'lambda',       x: 650,  y: 520, icon: 'lambda' },
+  { id: 'server1',   labelKey: 'server_a',     x: 950,  y: 110, icon: 'server', canFail: true },
+  { id: 'server2',   labelKey: 'server_b',     x: 920,  y: 520, icon: 'server' },
+  { id: 'rabbitmq',  labelKey: 'rabbitmq',     x: 1190, y: 190, icon: 'rabbitmq' },
+  { id: 'postgres',  labelKey: 'postgres',     x: 1190, y: 400, icon: 'database' },
+  { id: 'redis',     labelKey: 'redis',        x: 950,  y: 300, icon: 'redis', canFail: true },
+  { id: 'docker',    labelKey: 'docker',       x: 400,  y: 520, icon: 'docker' },
+  { id: 'k8s',       labelKey: 'k8s',          x: 100,  y: 350, icon: 'kubernetes' },
+  { id: 'aws',       labelKey: 'aws',          x: 200,  y: 520, icon: 'aws' },
 ];
 
 // ─── Connection paths (Bézier curves between nodes) ─────────────────────────
@@ -175,10 +177,10 @@ function buildPath(x1: number, y1: number, x2: number, y2: number): string {
   return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
 }
 
-const nodeMap = new Map(NODES.map(n => [n.id, n]));
+const nodeMapData = new Map(NODES_DATA.map(n => [n.id, n]));
 function conn(fromId: string, toId: string): Connection {
-  const a = nodeMap.get(fromId)!;
-  const b = nodeMap.get(toId)!;
+  const a = nodeMapData.get(fromId)!;
+  const b = nodeMapData.get(toId)!;
   return { from: fromId, to: toId, path: buildPath(a.x, a.y, b.x, b.y) };
 }
 
@@ -420,7 +422,14 @@ ConnectionComponent.displayName = 'ConnectionComponent';
 
 // ─── Main Background Component ──────────────────────────────────────────────
 const ArchitectureBackground = () => {
+  const { t } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
+
+  // Memoize nodes with translated labels
+  const nodes = useMemo(() => NODES_DATA.map(node => ({
+    ...node,
+    label: t(`arch.labels.${node.labelKey}`)
+  })), [t]);
 
   // Track which nodes are currently "failing"
   const [failingNodes, setFailingNodes] = useState<Set<string>>(new Set());
@@ -463,7 +472,7 @@ const ArchitectureBackground = () => {
   useEffect(() => {
     if (shouldReduceMotion) return;
 
-    const failableNodes = NODES.filter(n => n.canFail).map(n => n.id);
+    const failableNodes = nodes.filter(n => n.canFail).map(n => n.id);
     if (failableNodes.length === 0) return;
 
     const interval = setInterval(() => {
@@ -490,7 +499,7 @@ const ArchitectureBackground = () => {
     }, 6000 + Math.random() * 4000);
 
     return () => clearInterval(interval);
-  }, [shouldReduceMotion]);
+  }, [shouldReduceMotion, nodes]);
 
   // Check if a connection involves a failing node
   const isConnectionFailing = useCallback(
@@ -583,10 +592,10 @@ const ArchitectureBackground = () => {
 
         {/* Nodes layer */}
         <g>
-          {NODES.map(node => (
+          {nodes.map(node => (
             <NodeComponent
               key={node.id}
-              node={node}
+              node={node as any}
               isFailing={failingNodes.has(node.id)}
               svgMouseX={svgMouseX}
               svgMouseY={svgMouseY}
