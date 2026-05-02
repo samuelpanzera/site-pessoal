@@ -33,7 +33,7 @@ const PDISection: React.FC<PDISectionProps> = ({ onAccessClick }) => {
           
           <button 
             onClick={onAccessClick}
-            className="flex items-center gap-4 px-8 py-4 rounded-xl bg-white text-primary-container font-bold hover:gap-6 transition-all shadow-xl"
+            className="cursor-pointer flex items-center gap-4 px-8 py-4 rounded-xl bg-white text-primary-container font-bold hover:gap-6 transition-all shadow-xl"
           >
             {t('pdi.authenticate')}
             <span className="text-xl">→</span>

@@ -106,7 +106,7 @@ export const LanguageSwitcher: React.FC = () => {
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         type="button"
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all duration-200 border rounded-lg bg-black/40 border-white/10 text-white/80 hover:bg-white/5 hover:text-white hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-white/20"
+        className="cursor-pointer flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all duration-200 border rounded-lg bg-black/40 border-white/10 text-white/80 hover:bg-white/5 hover:text-white hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-white/20"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={(e) => handleKeyDown(e)}
         aria-haspopup="true"
@@ -142,7 +142,7 @@ export const LanguageSwitcher: React.FC = () => {
                   key={lang.code}
                   onClick={() => handleSelect(lang)}
                   onKeyDown={(e) => handleKeyDown(e, lang)}
-                  className={`flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors duration-150 ${
+                  className={`cursor-pointer flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors duration-150 ${
                     selectedLang.code === lang.code
                       ? 'bg-white/10 text-white font-medium'
                       : 'text-white/70 hover:bg-white/5 hover:text-white'

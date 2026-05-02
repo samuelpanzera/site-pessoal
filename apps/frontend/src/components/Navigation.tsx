@@ -23,7 +23,7 @@ const Navigation: React.FC<NavigationProps> = ({ onAccessClick }) => {
         <LanguageSwitcher />
         <button 
           onClick={onAccessClick}
-          className="px-4 py-2 rounded-md border border-primary-container text-xs font-bold uppercase tracking-widest hover:bg-primary/10 transition-all border-glow"
+          className="cursor-pointer px-4 py-2 rounded-md border border-primary-container text-xs font-bold uppercase tracking-widest hover:bg-primary/10 transition-all border-glow"
         >
           {t('nav.pdi_access')}
         </button>

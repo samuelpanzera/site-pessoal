@@ -62,7 +62,7 @@ const MockAuth: React.FC<MockAuthProps> = ({ isOpen, onClose }) => {
 
         <button 
           onClick={onClose}
-          className="text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors"
+          className="cursor-pointer text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors"
         >
           {t('mock_auth.cancel')}
         </button>

@@ -37,7 +37,7 @@ const CriteriaPopup = () => {
         onMouseLeave={() => setIsOpen(false)}
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setIsOpen(false)}
-        className="w-6 h-6 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold hover:bg-primary hover:text-on-primary transition-colors cursor-help"
+        className="w-6 h-6 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold hover:bg-primary hover:text-on-primary transition-colors cursor-pointer"
         aria-label="Skill criteria info"
       >
         ?
