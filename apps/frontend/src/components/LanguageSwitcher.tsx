@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { useOnClickOutside } from '../hooks/useOnClickOutside';
 
 const BrazilFlag = ({ className }: { className?: string }) => (
   <svg width="1em" height="1em" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" className={className} preserveAspectRatio="xMidYMid meet">
@@ -72,16 +73,9 @@ export const LanguageSwitcher: React.FC = () => {
     }
   }, [i18n.language]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useOnClickOutside(dropdownRef, () => {
+    setIsOpen(false);
+  });
 
   const handleSelect = (lang: typeof languages[0]) => {
     setSelectedLang(lang);

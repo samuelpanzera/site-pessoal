@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useFetch } from '../hooks/useFetch';
 
 interface Project {
   id: string;
@@ -43,22 +44,9 @@ const ProjectCard: React.FC<Project> = ({ title, description, techStack, link })
 };
 
 const Projects: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    fetch('http://localhost:8080/api/projects')
-      .then((res) => res.json())
-      .then((data) => {
-        setProjects(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to fetch projects:', err);
-        setLoading(false);
-      });
-  }, []);
+  const { data: projectsData, loading } = useFetch<Project[]>('http://localhost:8080/api/projects');
+  const projects = projectsData || [];
 
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto space-y-12">

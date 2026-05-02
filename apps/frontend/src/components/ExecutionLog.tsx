@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useFetch } from '../hooks/useFetch';
 
 interface LogEntry {
   id: string;
@@ -41,22 +42,9 @@ const LogItem: React.FC<LogEntry> = ({ date, title, description }) => {
 };
 
 const ExecutionLog: React.FC = () => {
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [loading, setLoading] = useState(true);
   const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    fetch('http://localhost:8080/api/logs')
-      .then((res) => res.json())
-      .then((data) => {
-        setLogs(data);
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.error('Failed to fetch logs:', err);
-        setLoading(false);
-      });
-  }, []);
+  const { data: logsData, loading } = useFetch<LogEntry[]>('http://localhost:8080/api/logs');
+  const logs = logsData || [];
 
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto space-y-16">

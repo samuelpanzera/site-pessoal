@@ -4,7 +4,7 @@ import resourcesToBackend from 'i18next-resources-to-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
-  .use(resourcesToBackend((language: string, namespace: string) => import(`./locales/${language}.json`)))
+  .use(resourcesToBackend((language: string) => import(`./locales/${language}.json`)))
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
