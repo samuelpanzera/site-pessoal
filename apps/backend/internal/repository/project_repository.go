@@ -1,14 +1,19 @@
-package api
+package repository
 
-import (
-	"encoding/json"
-	"net/http"
+import "github.com/samuel/pdipessoal/backend/internal/models"
 
-	"github.com/samuel/pdipessoal/backend/internal/models"
-)
+type ProjectRepository interface {
+	GetAll() ([]models.Project, error)
+}
 
-func GetProjectsHandler(w http.ResponseWriter, r *http.Request) {
-	projects := []models.Project{
+type mockProjectRepository struct{}
+
+func NewMockProjectRepository() ProjectRepository {
+	return &mockProjectRepository{}
+}
+
+func (r *mockProjectRepository) GetAll() ([]models.Project, error) {
+	return []models.Project{
 		{
 			ID:          "1",
 			Title:       "DEV_VOID Portfolio",
@@ -23,8 +28,5 @@ func GetProjectsHandler(w http.ResponseWriter, r *http.Request) {
 			TechStack:   []string{"Go", "Kafka", "PostgreSQL"},
 			Link:        "#",
 		},
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(projects)
+	}, nil
 }

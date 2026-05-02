@@ -1,15 +1,23 @@
-package api
+package repository
 
 import (
-	"encoding/json"
-	"net/http"
 	"time"
 
 	"github.com/samuel/pdipessoal/backend/internal/models"
 )
 
-func GetLogsHandler(w http.ResponseWriter, r *http.Request) {
-	logs := []models.ExecutionLogEntry{
+type LogRepository interface {
+	GetAll() ([]models.ExecutionLogEntry, error)
+}
+
+type mockLogRepository struct{}
+
+func NewMockLogRepository() LogRepository {
+	return &mockLogRepository{}
+}
+
+func (r *mockLogRepository) GetAll() ([]models.ExecutionLogEntry, error) {
+	return []models.ExecutionLogEntry{
 		{
 			ID:          "1",
 			Date:        time.Now().Add(-24 * time.Hour),
@@ -28,8 +36,5 @@ func GetLogsHandler(w http.ResponseWriter, r *http.Request) {
 			Title:       "UI Components: Phase 1",
 			Description: "Hero e TechStack implementados seguindo a estética Obsidian Pulse.",
 		},
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(logs)
+	}, nil
 }

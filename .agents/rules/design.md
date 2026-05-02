@@ -1,5 +1,6 @@
 ---
-trigger: always_on
+trigger: model_decision
+description: The design system is engineered for a high-end Developer portfolio, prioritizing a high-tech, "void" aesthetic that emphasizes precision and logic. The brand personality is mysterious yet authoritative, evoking the feeling of a sophisticated
 ---
 
 ---

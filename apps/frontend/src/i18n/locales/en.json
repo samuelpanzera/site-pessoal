@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "contact": "Contact",
+    "pdi_access": "PDI Access"
+  },
+  "hero": {
+    "title": "Architecting <1/> <2>Reliable</2> Backends",
+    "description": "Back-end Developer with a passion for high-performance systems and distributed architectures. Crafting the invisible infrastructure that powers the modern web.",
+    "view_projects": "View Projects",
+    "contact_me": "Contact Me"
+  },
+  "tech_stack": {
+    "title_prefix": "My",
+    "title_highlight": "Skills",
+    "description": "I build with a focus on speed and scalability. My stack is chosen for precision, reliability, and the ability to handle complex logic with minimal overhead.",
+    "criteria": {
+      "expert": {
+        "title": "Expert",
+        "desc": "4+ years, production and tech leadership"
+      },
+      "proficient": {
+        "title": "Proficient",
+        "desc": "2-4 years, consistent use in real projects"
+      },
+      "intermediate": {
+        "title": "Intermediate",
+        "desc": "1-2 years, professional/personal projects"
+      },
+      "learning": {
+        "title": "Learning",
+        "desc": "< 1 year, actively studying"
+      }
+    }
+  }
+}

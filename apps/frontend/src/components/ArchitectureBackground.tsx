@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef, memo } from 'react';
+import { useEffect, useState, useCallback, useRef, memo, type ReactElement } from 'react';
 import { motion, useMotionValue, useMotionTemplate, useReducedMotion, useTransform, useSpring } from 'motion/react';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -19,7 +19,7 @@ interface Connection {
 
 // ─── Simplified monochrome icons (SVG path data) ────────────────────────────
 // Using simplified icon representations that fit the neon aesthetic
-const ICONS: Record<string, JSX.Element> = {
+const ICONS: Record<string, ReactElement> = {
   web: (
     <g transform="translate(-12,-12)">
       {/* Laptop Screen */}
@@ -426,7 +426,7 @@ const ArchitectureBackground = () => {
   const [failingNodes, setFailingNodes] = useState<Set<string>>(new Set());
 
   // Track hovered connections
-  const [hoveredConn, setHoveredConn] = useState<string | null>(null);
+  // const [hoveredConn, setHoveredConn] = useState<string | null>(null);
 
   const spotlightX = useMotionValue(0);
   const spotlightY = useMotionValue(0);
@@ -571,12 +571,12 @@ const ArchitectureBackground = () => {
 
         {/* Connections layer */}
         <g>
-          {CONNECTIONS.map((c, i) => (
+          {CONNECTIONS.map((c) => (
             <ConnectionComponent
               key={`${c.from}-${c.to}`}
               connection={c}
               isFailing={isConnectionFailing(c)}
-              isHovered={hoveredConn === `${c.from}-${c.to}`}
+              isHovered={false /* hoveredConn === `${c.from}-${c.to}` */}
             />
           ))}
         </g>

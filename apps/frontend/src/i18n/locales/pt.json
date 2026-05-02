@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "pdi_access": "PDI Access"
+  },
+  "hero": {
+    "title": "Arquitetando <1/> Backends <2>Confiáveis</2>",
+    "description": "Desenvolvedor Back-end apaixonado por sistemas de alta performance e arquiteturas distribuídas. Construindo a infraestrutura invisível que impulsiona a web moderna.",
+    "view_projects": "Ver Projetos",
+    "contact_me": "Fale Comigo"
+  },
+  "tech_stack": {
+    "title_prefix": "Minhas",
+    "title_highlight": "Habilidades",
+    "description": "Desenvolvo com foco em velocidade e escalabilidade. Minha stack é escolhida por precisão, confiabilidade e a capacidade de lidar com lógica complexa com sobrecarga mínima.",
+    "criteria": {
+      "expert": {
+        "title": "Expert",
+        "desc": "4+ anos, produção e liderança técnica"
+      },
+      "proficient": {
+        "title": "Proficient",
+        "desc": "2–4 anos, uso consistente em projetos reais"
+      },
+      "intermediate": {
+        "title": "Intermediate",
+        "desc": "1–2 anos, projetos profissionais/pessoais"
+      },
+      "learning": {
+        "title": "Learning",
+        "desc": "< 1 ano, estudando ativamente"
+      }
+    }
+  }
+}
