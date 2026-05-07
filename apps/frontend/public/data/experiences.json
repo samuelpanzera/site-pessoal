@@ -4,6 +4,7 @@
     "order": 1,
     "company": "remopt",
     "logo": "/images/logos/remopt_logo.jpg",
+    "linkedinUrl": "https://www.linkedin.com/company/121680/",
     "role": {
       "pt": "Engenheiro de Software Pleno",
       "en": "Mid-level Software Engineer"
@@ -19,14 +20,15 @@
     "order": 2,
     "company": "dti digital",
     "logo": "/images/logos/dtidigital_logo.jpg",
+    "linkedinUrl": "https://www.linkedin.com/company/856497/",
     "role": {
       "pt": "Desenvolvedor de Back-end",
       "en": "Back-end Developer"
     },
     "period": { "start": "2022-06", "end": "2025-11" },
     "description": {
-      "pt": "Atuei como especialista na modernização do ERP Oracle NetSuite, liderando a transição de sistemas monolíticos para microsserviços de alta performance com Node.js e TypeScript (SOLID, DDD). Implementei e gerenciei esteiras CI/CD, mantendo 100% de cobertura em entregas críticas com TDD e Jest. Assumi liderança técnica na ausência da gestão, conduzindo code reviews, mentorias e decisões estratégicas de arquitetura.",
-      "en": "I specialized in modernizing the Oracle NetSuite ERP, leading the transition from monolithic systems to high-performance microservices using Node.js and TypeScript (SOLID, DDD). I implemented and managed CI/CD pipelines, maintaining 100% coverage on critical deliveries with TDD and Jest. I assumed technical leadership during management absence, conducting code reviews, mentoring, and strategic architecture decisions."
+      "pt": "Atuei como especialista na modernização do ERP Oracle NetSuite, liderando a transição de sistemas legados monolíticos para um monolito modular de alta performance com Node.js e TypeScript (SOLID, DDD). Implementei e gerenciei esteiras CI/CD, mantendo 100% de cobertura em entregas críticas com TDD e Jest. Assumi liderança técnica na ausência da gestão, conduzindo code reviews, mentorias e decisões estratégicas de arquitetura.",
+      "en": "I specialized in modernizing the Oracle NetSuite ERP, leading the transition from legacy monolithic systems to a high-performance modular monolith using Node.js and TypeScript (SOLID, DDD). I implemented and managed CI/CD pipelines, maintaining 100% coverage on critical deliveries with TDD and Jest. I assumed technical leadership during management absence, conducting code reviews, mentoring, and strategic architecture decisions."
     }
   },
   {
@@ -34,6 +36,7 @@
     "order": 3,
     "company": "Teknisa",
     "logo": "/images/logos/teknisaoficial_logo.jpg",
+    "linkedinUrl": "https://www.linkedin.com/company/467048/",
     "role": {
       "pt": "Analista de Suporte de Software",
       "en": "Software Support Analyst"
@@ -49,6 +52,7 @@
     "order": 4,
     "company": "Papyrus Assessoria Contábil",
     "logo": "/images/logos/contabilidade_papyrusconexus_ltda_logo.jpg",
+    "linkedinUrl": "https://www.linkedin.com/company/contabilidadeconexus/",
     "role": {
       "pt": "Estagiário de TI",
       "en": "IT Intern"
@@ -64,6 +68,7 @@
     "order": 5,
     "company": "Paul Wurth",
     "logo": "/images/logos/paul_wurth_logo.jpg",
+    "linkedinUrl": "https://www.linkedin.com/company/paul-wurth/",
     "role": {
       "pt": "Jovem Aprendiz",
       "en": "Apprentice"
@@ -79,6 +84,7 @@
     "order": 6,
     "company": "Grupo Roma Brasil",
     "logo": "/images/logos/grupo_roma_brasil_logo.jpg",
+    "linkedinUrl": "https://www.linkedin.com/company/grupo-roma-brasil/",
     "role": {
       "pt": "Estagiário de Pesquisa",
       "en": "Research Intern"

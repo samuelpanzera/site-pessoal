@@ -25,27 +25,43 @@ const SkeletonCard: React.FC = () => (
   </div>
 );
 
-const LogoAvatar: React.FC<{ logo?: string; company: string }> = ({ logo, company }) => {
+const LogoAvatar: React.FC<{ logo?: string; company: string; linkedinUrl?: string }> = ({ logo, company, linkedinUrl }) => {
   const [failed, setFailed] = useState(false);
 
-  if (logo && !failed) {
+  const ImageContent = (
+    <>
+      {logo && !failed ? (
+        <img
+          src={logo}
+          alt={company}
+          onError={() => setFailed(true)}
+          className="w-14 h-14 rounded-xl object-contain bg-surface-container-high border border-white/5 shrink-0 z-10 p-1"
+        />
+      ) : (
+        <div className="w-14 h-14 rounded-xl bg-[#18392B] border border-white/5 flex items-center justify-center shrink-0 z-10">
+          <span className="text-[#8CB49B] font-bold text-xl font-space-grotesk select-none">
+            {company.charAt(0).toLowerCase()}
+          </span>
+        </div>
+      )}
+    </>
+  );
+
+  if (linkedinUrl) {
     return (
-      <img
-        src={logo}
-        alt={company}
-        onError={() => setFailed(true)}
-        className="w-14 h-14 rounded-xl object-contain bg-surface-container-high border border-white/5 shrink-0 z-10 p-1"
-      />
+      <a
+        href={linkedinUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:opacity-80 transition-opacity cursor-pointer"
+        title={`Visit ${company} on LinkedIn`}
+      >
+        {ImageContent}
+      </a>
     );
   }
 
-  return (
-    <div className="w-14 h-14 rounded-xl bg-[#18392B] border border-white/5 flex items-center justify-center shrink-0 z-10">
-      <span className="text-[#8CB49B] font-bold text-xl font-space-grotesk select-none">
-        {company.charAt(0).toLowerCase()}
-      </span>
-    </div>
-  );
+  return ImageContent;
 };
 
 const ExperienceCard: React.FC<{ item: ExperienceItem; lang: Lang; isLast: boolean }> = ({
@@ -55,7 +71,7 @@ const ExperienceCard: React.FC<{ item: ExperienceItem; lang: Lang; isLast: boole
 }) => (
   <div className="relative flex gap-6 group">
     <div className="flex flex-col items-center">
-      <LogoAvatar logo={item.logo} company={item.company} />
+      <LogoAvatar logo={item.logo} company={item.company} linkedinUrl={item.linkedinUrl} />
       {!isLast && <div className="w-px h-full bg-surface-container-high my-2 flex-grow" />}
     </div>
 

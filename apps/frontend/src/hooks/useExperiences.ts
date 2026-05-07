@@ -5,6 +5,7 @@ export interface ExperienceItem {
   order: number;
   company: string;
   logo?: string;
+  linkedinUrl?: string;
   role: { pt: string; en: string };
   period: { start: string; end: string | null };
   description: { pt: string; en: string };
