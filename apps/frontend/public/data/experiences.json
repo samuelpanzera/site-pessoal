@@ -1,0 +1,92 @@
+[
+  {
+    "id": "remopt",
+    "order": 1,
+    "company": "remopt",
+    "logo": "/images/logos/remopt_logo.jpg",
+    "role": {
+      "pt": "Engenheiro de Software Pleno",
+      "en": "Mid-level Software Engineer"
+    },
+    "period": { "start": "2025-11", "end": null },
+    "description": {
+      "pt": "Atuo no desenvolvimento backend e na sustentação de uma plataforma de integração de alta performance, construindo serviços robustos e concorrentes utilizando Go (Golang). Exerço a liderança técnica do time, definindo padrões de código, arquitetura e estratégias com foco em escalabilidade. Gerencio recursos e faço deploy em infraestrutura AWS, implemento Kong Gateway para segurança e rate limiting das APIs, e realizo administração avançada de PostgreSQL.",
+      "en": "I work on backend development and maintenance of a high-performance integration platform, building robust concurrent services using Go. I lead the technical team, setting code standards, architecture, and implementation strategies focused on scalability. I manage resources and deploy services on AWS infrastructure, implement Kong Gateway for API security and rate limiting, and perform advanced PostgreSQL administration."
+    }
+  },
+  {
+    "id": "dti-digital",
+    "order": 2,
+    "company": "dti digital",
+    "logo": "/images/logos/dtidigital_logo.jpg",
+    "role": {
+      "pt": "Desenvolvedor de Back-end",
+      "en": "Back-end Developer"
+    },
+    "period": { "start": "2022-06", "end": "2025-11" },
+    "description": {
+      "pt": "Atuei como especialista na modernização do ERP Oracle NetSuite, liderando a transição de sistemas monolíticos para microsserviços de alta performance com Node.js e TypeScript (SOLID, DDD). Implementei e gerenciei esteiras CI/CD, mantendo 100% de cobertura em entregas críticas com TDD e Jest. Assumi liderança técnica na ausência da gestão, conduzindo code reviews, mentorias e decisões estratégicas de arquitetura.",
+      "en": "I specialized in modernizing the Oracle NetSuite ERP, leading the transition from monolithic systems to high-performance microservices using Node.js and TypeScript (SOLID, DDD). I implemented and managed CI/CD pipelines, maintaining 100% coverage on critical deliveries with TDD and Jest. I assumed technical leadership during management absence, conducting code reviews, mentoring, and strategic architecture decisions."
+    }
+  },
+  {
+    "id": "teknisa",
+    "order": 3,
+    "company": "Teknisa",
+    "logo": "/images/logos/teknisaoficial_logo.jpg",
+    "role": {
+      "pt": "Analista de Suporte de Software",
+      "en": "Software Support Analyst"
+    },
+    "period": { "start": "2021-12", "end": "2022-06" },
+    "description": {
+      "pt": "Iniciei como Estagiário e evoluí para Analista, prestando suporte técnico especializado no software Odhen (PDVs de restaurantes). Atuei como plantonista realizando atualizações em servidores, substituição de arquivos corrompidos e aplicação de soluções técnicas para falhas sistêmicas.",
+      "en": "Started as an intern and grew to Analyst, providing specialized technical support for the Odhen software (restaurant POS systems). Worked on-call performing server updates, replacing corrupted files, and applying technical solutions for systemic failures."
+    }
+  },
+  {
+    "id": "papyrus",
+    "order": 4,
+    "company": "Papyrus Assessoria Contábil",
+    "logo": "/images/logos/contabilidade_papyrusconexus_ltda_logo.jpg",
+    "role": {
+      "pt": "Estagiário de TI",
+      "en": "IT Intern"
+    },
+    "period": { "start": "2021-09", "end": "2021-12" },
+    "description": {
+      "pt": "Prestei suporte técnico para problemas em Windows e softwares corporativos, realizei administração de logins via Active Directory e identifiquei falhas relacionadas a hardware.",
+      "en": "Provided technical support for Windows and corporate software issues, managed logins via Active Directory, and identified hardware-related failures."
+    }
+  },
+  {
+    "id": "paul-wurth",
+    "order": 5,
+    "company": "Paul Wurth",
+    "logo": "/images/logos/paul_wurth_logo.jpg",
+    "role": {
+      "pt": "Jovem Aprendiz",
+      "en": "Apprentice"
+    },
+    "period": { "start": "2021-03", "end": "2021-10" },
+    "description": {
+      "pt": "Preenchi planilhas de dados, criei gráficos via Excel e organizei documentos institucionais em formato PDF.",
+      "en": "Filled in data spreadsheets, created charts in Excel, and organized institutional documents in PDF format."
+    }
+  },
+  {
+    "id": "grupo-roma",
+    "order": 6,
+    "company": "Grupo Roma Brasil",
+    "logo": "/images/logos/grupo_roma_brasil_logo.jpg",
+    "role": {
+      "pt": "Estagiário de Pesquisa",
+      "en": "Research Intern"
+    },
+    "period": { "start": "2018-11", "end": "2019-10" },
+    "description": {
+      "pt": "Atuei no setor de Qualidade de CRM da empresa, realizando ligações para clientes, identificando problemas na venda de veículos ou nos serviços de oficina, registrando as ocorrências em sistema próprio e implementando soluções para garantir a satisfação do cliente.",
+      "en": "I worked in the company's CRM Quality department, making calls to customers, identifying issues in vehicle sales or workshop services, logging occurrences in the internal system, and implementing solutions to ensure customer satisfaction."
+    }
+  }
+]

@@ -8,6 +8,8 @@ export function useFetch<T>(url: string) {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
+    setData(null);
+    setError(null);
 
     fetch(url)
       .then((res) => {

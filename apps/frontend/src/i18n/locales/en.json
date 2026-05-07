@@ -5,7 +5,7 @@
     "contact": "Contact",
     "pdi_access": "PDI Access",
     "tech_stack": "Tech Stack",
-    "execution_log": "Execution Log"
+    "experiences": "Experiences"
   },
   "hero": {
     "title": "Architecting <1/> <2>Reliable</2> Backends",
@@ -37,18 +37,18 @@
     }
   },
   "projects": {
-    "title": "System",
-    "title_highlight": "Architectures",
-    "description": "A collection of projects demonstrating modular logic, high-concurrency handling, and distributed system design.",
-    "loading": "Loading System Records...",
-    "explore": "Explore System"
+    "title": "My",
+    "title_highlight": "Projects",
+    "description": "A selection of my most recent and relevant projects.",
+    "loading": "Loading Projects...",
+    "explore": "Explore Project"
   },
-  "execution_log": {
-    "title": "Execution",
-    "title_highlight": "Log",
-    "description": "A real-time terminal of system updates, feature deployments, and architectural evolutions.",
-    "clock_label": "System Clock",
-    "loading": "[WAIT] Fetching system logs..."
+  "experiences": {
+    "title": "My",
+    "title_highlight": "Experiences",
+    "description": "A summary of my professional journey.",
+    "show_more": "Show earlier experiences",
+    "show_less": "Hide earlier experiences"
   },
   "pdi": {
     "restricted_area": "Restricted Area",

@@ -3,12 +3,12 @@ import Navigation from '../components/Navigation'
 import Hero from '../components/Hero'
 import TechStack from '../components/TechStack'
 import Projects from '../components/Projects'
-import ExecutionLog from '../components/ExecutionLog'
 import PDISection from '../components/PDISection'
 import MockAuth from '../components/MockAuth'
 import Footer from '../components/Footer'
 import Divider from '../components/Divider'
 import ArchitectureBackground from '../components/ArchitectureBackground'
+import Experience from '../components/Experience'
 
 function Home() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -27,7 +27,7 @@ function Home() {
         <Divider />
         <Projects />
         <Divider />
-        <ExecutionLog />
+        <Experience />
         <Divider />
         <PDISection onAccessClick={handleAccessClick} />
       </main>

@@ -1,18 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useFetch } from '../hooks/useFetch';
+import { useProjects, type ProjectItem } from '../hooks/useProjects';
 
-interface Project {
-  id: string;
-  title: string;
+type ProjectCardProps = Pick<ProjectItem, 'title' | 'techStack' | 'link'> & {
   description: string;
-  techStack: string[];
-  link: string;
-}
+};
 
-const ProjectCard: React.FC<Project> = ({ title, description, techStack, link }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, techStack, link }) => {
   const { t } = useTranslation();
-  
+
   return (
     <div className="group p-8 rounded-xl bg-surface-container border border-white/5 hover:border-primary/50 transition-all duration-300 hover:glow-purple flex flex-col h-full">
       <div className="flex-1 space-y-4">
@@ -32,8 +28,10 @@ const ProjectCard: React.FC<Project> = ({ title, description, techStack, link })
         </div>
       </div>
       <div className="pt-8">
-        <a 
-          href={link} 
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary hover:gap-3 transition-all"
         >
           {t('projects.explore')} <span className="text-lg">→</span>
@@ -44,9 +42,10 @@ const ProjectCard: React.FC<Project> = ({ title, description, techStack, link })
 };
 
 const Projects: React.FC = () => {
-  const { t } = useTranslation();
-  const { data: projectsData, loading } = useFetch<Project[]>('http://localhost:8080/api/projects');
-  const projects = projectsData || [];
+  const { t, i18n } = useTranslation();
+  const { projects, loading } = useProjects();
+  const isPt = i18n.language.startsWith('pt');
+  const sorted = [...projects].sort((a, b) => a.order - b.order);
 
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto space-y-12">
@@ -65,8 +64,14 @@ const Projects: React.FC = () => {
             {t('projects.loading')}
           </div>
         ) : (
-          projects.map((project) => (
-            <ProjectCard key={project.id} {...project} />
+          sorted.map((project) => (
+            <ProjectCard
+              key={project.id}
+              title={project.title}
+              description={isPt ? project.description.pt : project.description.en}
+              techStack={project.techStack}
+              link={project.link}
+            />
           ))
         )}
       </div>

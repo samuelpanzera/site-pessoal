@@ -5,7 +5,7 @@ const Hero: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center px-6 overflow-hidden mb-32">
+    <section className="relative min-h-screen flex items-center px-6 overflow-hidden mb-15">
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="space-y-6">
           <div className="flex items-center gap-4 mb-6">
@@ -27,13 +27,13 @@ const Hero: React.FC = () => {
             {t('hero.description')}
           </p>
           <div className="flex gap-4 pt-4">
-            <a 
+            <a
               href="#projects"
               className="cursor-pointer inline-flex items-center justify-center px-8 py-4 rounded-md bg-primary text-on-primary font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(221,183,255,0.3)]"
             >
               {t('hero.view_projects')}
             </a>
-            <a 
+            <a
               href="#contact"
               className="cursor-pointer inline-flex items-center justify-center px-8 py-4 rounded-md border border-white/10 hover:border-white/20 transition-all"
             >

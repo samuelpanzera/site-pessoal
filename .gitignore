@@ -7,6 +7,7 @@ dist/
 build/
 *.log
 .env*
+!.env.example
 coverage/
 
 # Go
@@ -15,6 +16,7 @@ coverage/
 vendor/
 *.out
 apps/backend/bin/
+apps/backend/server
 
 # Turborepo
 .turbo/

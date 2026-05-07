@@ -5,7 +5,7 @@
     "contact": "Contato",
     "pdi_access": "PDI Access",
     "tech_stack": "Stack Técnica",
-    "execution_log": "Log de Execução"
+    "experiences": "Experiências"
   },
   "hero": {
     "title": "Arquitetando <1/> Backends <2>Confiáveis</2>",
@@ -37,18 +37,18 @@
     }
   },
   "projects": {
-    "title": "Arquiteturas",
-    "title_highlight": "de Sistema",
-    "description": "Uma coleção de projetos demonstrando lógica modular, manipulação de alta concorrência e design de sistemas distribuídos.",
-    "loading": "Carregando Registros do Sistema...",
-    "explore": "Explorar Sistema"
+    "title": "Meus",
+    "title_highlight": "Projetos",
+    "description": "Uma seleção dos meus projetos mais recentes e relevantes.",
+    "loading": "Carregando Projetos...",
+    "explore": "Explorar Projeto"
   },
-  "execution_log": {
-    "title": "Log de",
-    "title_highlight": "Execução",
-    "description": "Um terminal em tempo real de atualizações do sistema, implantações de recursos e evoluções arquiteturais.",
-    "clock_label": "Relógio do Sistema",
-    "loading": "[AGUARDE] Buscando logs do sistema..."
+  "experiences": {
+    "title": "Minhas",
+    "title_highlight": "Experiências",
+    "description": "Um resumo da minha trajetória profissional.",
+    "show_more": "Ver experiências anteriores",
+    "show_less": "Ocultar experiências anteriores"
   },
   "pdi": {
     "restricted_area": "Área Restrita",

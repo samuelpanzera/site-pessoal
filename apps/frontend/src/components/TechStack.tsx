@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
+
 interface SkillProps {
   name: string;
   levelText: string;
@@ -15,7 +16,7 @@ const SkillBar: React.FC<SkillProps> = ({ name, levelText, percentage }) => {
         <span className="text-primary">{levelText}</span>
       </div>
       <div className="h-2 w-full bg-white/5 rounded-full relative overflow-hidden">
-        <div 
+        <div
           className="h-full bg-gradient-to-r from-primary-container to-primary shadow-[0_0_10px_rgba(221,183,255,0.4)] transition-all duration-1000 ease-out absolute left-0 top-0"
           style={{ width: `${percentage}%` }}
         />
@@ -35,25 +36,26 @@ const CriteriaPopup = () => {
 
   useOnClickOutside(wrapperRef, () => {
     setIsClicked(false);
+    setIsHovered(false);
   });
 
   const isOpen = isHovered || isClicked;
 
   return (
-    <div 
+    <div
       className="relative inline-block ml-4"
       ref={wrapperRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <button 
+      <button
         onClick={() => setIsClicked(!isClicked)}
         className={`w-6 h-6 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold transition-colors cursor-pointer ${isOpen ? 'bg-primary text-on-primary' : 'hover:bg-primary hover:text-on-primary'}`}
         aria-label="Skill criteria info"
       >
         ?
       </button>
-      
+
       {isOpen && (
         <div className="absolute z-50 left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 p-5 rounded-xl bg-surface-container border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-md after:absolute after:inset-x-0 after:top-full after:h-3 after:bg-transparent">
           <div className="space-y-4 text-sm font-manrope">
@@ -84,7 +86,7 @@ const CriteriaPopup = () => {
 
 const TechStack: React.FC = () => {
   const { t } = useTranslation();
-  
+
   const skills = [
     { name: 'IA', levelKey: 'expert', percentage: 100 },
     { name: 'Node / TS / JS', levelKey: 'expert', percentage: 100 },
@@ -97,7 +99,7 @@ const TechStack: React.FC = () => {
   return (
     <section className="py-32 px-6 max-w-5xl mx-auto relative">
       {/* Watermark text */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 flex items-start justify-center pt-12">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 flex items-start justify-center pt-16 ">
         <span className="text-[6rem] md:text-[10rem] font-space-grotesk font-black text-white/[0.03] uppercase tracking-tighter leading-none">
           Skills
         </span>

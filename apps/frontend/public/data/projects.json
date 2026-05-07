@@ -1,0 +1,35 @@
+[
+  {
+    "id": "nark",
+    "order": 1,
+    "title": "Nark",
+    "description": {
+      "pt": "Plataforma desktop concebida para desafiar a indústria bilionária da Steam, oferecendo distribuição de jogos com taxas justas e foco em desenvolvedores independentes.",
+      "en": "Desktop platform built to challenge Steam's billion-dollar industry, offering game distribution with fair fees and a focus on independent developers."
+    },
+    "techStack": ["Tauri", "React", "TypeScript", "Rust", "Tailwind"],
+    "link": "https://github.com/samuelpanzera/Nark"
+  },
+  {
+    "id": "balizaapp",
+    "order": 2,
+    "title": "BalizaApp",
+    "description": {
+      "pt": "Aplicativo voltado para instrutores de trânsito autônomos, permitindo agendamento de aulas, gestão de alunos e acompanhamento de progresso.",
+      "en": "App built for independent driving instructors, enabling class scheduling, student management, and progress tracking."
+    },
+    "techStack": ["TBD"],
+    "link": "https://github.com/BalizaApp/balizaapp"
+  },
+  {
+    "id": "turnery-web",
+    "order": 3,
+    "title": "Turnery",
+    "description": {
+      "pt": "Site institucional para empresa de usinagem, exibindo catálogo de peças fabricadas, capacidades técnicas e canais de contato comercial.",
+      "en": "Institutional website for a machining company, showcasing manufactured parts catalog, technical capabilities, and commercial contact channels."
+    },
+    "techStack": ["Next.js", "TypeScript", "Tailwind", "Bun", "React"],
+    "link": "https://github.com/samuelpanzera/turnery-web"
+  }
+]
