@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - apps/backend/**
+      - infra/portfolio-api/**
       - .github/workflows/deploy-api.yml
 
 env:
@@ -46,7 +47,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy na VPS
+      - uses: actions/checkout@v4
+
+      - name: Sync Quadlet config to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: infra/portfolio-api/portfolio-api.container
+          target: /etc/containers/systemd/
+          strip_components: 2
+
+      - name: Pull new image and restart service
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -54,5 +67,6 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             sudo podman pull ghcr.io/samuelpanzera/portfolio-api:latest
-            sudo systemctl restart container-portfolio-api
-            sudo systemctl status container-portfolio-api --no-pager
+            sudo systemctl daemon-reload
+            sudo systemctl restart portfolio-api
+            sudo systemctl status portfolio-api --no-pager

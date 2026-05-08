@@ -1,0 +1,19 @@
+[Unit]
+Description=Portfolio API (Go/Fiber)
+Documentation=https://github.com/samuelpanzera/site-pessoal
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/samuelpanzera/portfolio-api:latest
+ContainerName=portfolio-api
+PublishPort=127.0.0.1:3000:3000
+Environment=PORT=3000
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target default.target

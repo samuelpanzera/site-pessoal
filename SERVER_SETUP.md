@@ -219,33 +219,15 @@ nginx -t && systemctl reload nginx
 
 ---
 
-## 5. Backend Go (Podman)
+## 5. Backend Go (Podman + Quadlet)
 
-> A VPS não armazena código-fonte. A imagem é buildada pelo GitHub Actions e publicada no GHCR. A VPS só faz `podman pull`.
+> A VPS não armazena código-fonte. Imagens são buildadas pelo GitHub Actions e publicadas no GHCR. Os arquivos `.container` (Quadlet) versionados em `infra/` no repositório são sincronizados na VPS via CI/CD e o systemd cuida de tudo.
 
-### Pré-requisito 1: tornar o pacote GHCR público
+### Como funciona Quadlet
 
-Após o primeiro push do workflow `deploy-api.yml` ter sucesso (job `build-and-push`):
+`Arquivos .container` em `/etc/containers/systemd/` viram automaticamente services do systemd após `daemon-reload`. Não usa daemon, integra com `journalctl`, e o `[Install] WantedBy=` controla auto-start no boot **sem precisar de `systemctl enable`**.
 
-1. Acessar https://github.com/samuelpanzera?tab=packages
-2. Clicar em `portfolio-api`
-3. **Package settings** → **Change visibility** → **Public**
-
-Sem isso, o `podman pull` na VPS falha com `unauthorized: authentication required`.
-
-### Pré-requisito 2: configurar Secrets no GitHub
-
-No repositório GitHub → **Settings → Secrets and variables → Actions**, adicionar:
-
-| Secret | Valor |
-|---|---|
-| `VPS_HOST` | IP da VPS |
-| `VPS_SSH_USER` | `deploy` (usuário criado no Passo 0.5 abaixo) |
-| `VPS_SSH_KEY` | Conteúdo da chave privada SSH dedicada para deploy |
-
-O `GITHUB_TOKEN` é automático — não precisa criar.
-
-### Passo 0.5 — Criar usuário `deploy` na VPS (uma vez)
+### Passo 5.1 — Criar usuário `deploy` (uma vez)
 
 ```bash
 useradd -m -s /bin/bash deploy
@@ -260,64 +242,74 @@ chmod 700 /home/deploy/.ssh
 chmod 600 /home/deploy/.ssh/authorized_keys
 chown -R deploy:deploy /home/deploy/.ssh
 
-# Permitir podman e systemctl sem senha
+# Permitir podman + systemctl sem senha
 cat > /etc/sudoers.d/deploy << 'EOF'
 deploy ALL=(ALL) NOPASSWD: /usr/bin/podman, /bin/systemctl
 EOF
 chmod 440 /etc/sudoers.d/deploy
 ```
 
-### Primeiro deploy manual (antes do CI/CD estar rodando)
+### Passo 5.2 — Preparar diretório do Quadlet
 
 ```bash
-# Baixar a imagem (requer pacote GHCR público — veja Pré-requisito 1)
-podman pull ghcr.io/samuelpanzera/portfolio-api:latest
-
-# Rodar o container
-podman run -d \
-  --name portfolio-api \
-  -p 127.0.0.1:3000:3000 \
-  -e PORT=3000 \
-  ghcr.io/samuelpanzera/portfolio-api:latest
-
-podman ps
-podman logs portfolio-api
+mkdir -p /etc/containers/systemd
+chown deploy:deploy /etc/containers/systemd
 ```
 
-### Auto-start no boot + integração com CI/CD
+> O CI/CD vai escrever os arquivos `.container` aqui via SCP. Como o usuário `deploy` já tem `sudo NOPASSWD: podman` (efetivamente root), não há perda de segurança em deixar este diretório com ownership do `deploy`.
 
-> O flag `--new` é **crítico**: faz o systemd recriar o container do zero a cada start, lendo a imagem mais recente. Sem `--new`, o `systemctl restart` apenas reinicia o container antigo, e a imagem nova nunca toma efeito.
+### Passo 5.3 — Configurar Secrets no GitHub
+
+Repositório GitHub → **Settings → Secrets and variables → Actions** → **New repository secret**:
+
+| Secret | Valor |
+|---|---|
+| `VPS_HOST` | IP da VPS |
+| `VPS_SSH_USER` | `deploy` |
+| `VPS_SSH_KEY` | Conteúdo da chave privada SSH dedicada |
+
+`GITHUB_TOKEN` é automático.
+
+### Passo 5.4 — Tornar o pacote GHCR público
+
+Após o primeiro push de `apps/backend/**`, o workflow gera a imagem no GHCR. Antes do primeiro deploy:
+
+1. Acesse https://github.com/samuelpanzera?tab=packages
+2. Clique em `portfolio-api`
+3. **Package settings → Change visibility → Public**
+
+Sem isso, `podman pull` falha com `unauthorized`.
+
+### Passo 5.5 — Primeiro deploy
+
+Após o workflow rodar com sucesso (build + sync do `.container` + restart), a primeira vez precisa de uma intervenção:
 
 ```bash
-# Para o container manual antes de gerar o unit
-podman stop portfolio-api && podman rm portfolio-api
-
-# Gera unit file que recria o container a cada start
-podman create \
-  --name portfolio-api \
-  -p 127.0.0.1:3000:3000 \
-  -e PORT=3000 \
-  ghcr.io/samuelpanzera/portfolio-api:latest
-
-podman generate systemd --new --name portfolio-api --restart-policy=always --files
-
-mv container-portfolio-api.service /etc/systemd/system/
-systemctl daemon-reload
-systemctl enable container-portfolio-api
-systemctl start container-portfolio-api
-systemctl status container-portfolio-api
+# Como root (ou com sudo), na VPS:
+systemctl daemon-reload    # Quadlet gera o service file de portfolio-api.container
+systemctl start portfolio-api
+systemctl status portfolio-api
+journalctl -u portfolio-api -f   # acompanhar logs
 ```
 
-### Deploys futuros (automático via CI/CD)
+A partir daqui, todos os deploys subsequentes são automáticos pelo workflow.
 
-Qualquer push em `apps/backend/**` no branch `master` dispara o workflow `.github/workflows/deploy-api.yml`, que:
-1. Builda a imagem com cache
-2. Faz push para `ghcr.io/samuelpanzera/portfolio-api:latest` + tag com SHA
-3. Conecta na VPS via SSH como `deploy` e roda:
-   ```bash
-   sudo podman pull ghcr.io/samuelpanzera/portfolio-api:latest
-   sudo systemctl restart container-portfolio-api
-   ```
+### Deploys futuros (automático)
+
+Push em `apps/backend/**` ou `infra/portfolio-api/**`:
+1. Workflow builda imagem → push GHCR (com cache)
+2. SCP do `.container` para `/etc/containers/systemd/`
+3. SSH na VPS: `sudo podman pull && sudo systemctl daemon-reload && sudo systemctl restart portfolio-api`
+
+Para alterar config (porta, env vars, etc.): edite `infra/portfolio-api/portfolio-api.container`, commit, push.
+
+### Adicionando um novo serviço
+
+Veja `infra/README.md`. Resumo:
+1. Criar `infra/<projeto>/<projeto>.container` no repo
+2. Criar workflow espelhando `deploy-api.yml`
+3. Adicionar config NGINX para o subdomínio
+4. Push → systemd descobre e starta sozinho na VPS
 
 ---
 
