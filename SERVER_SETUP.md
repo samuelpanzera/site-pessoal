@@ -223,27 +223,59 @@ nginx -t && systemctl reload nginx
 
 > A VPS não armazena código-fonte. A imagem é buildada pelo GitHub Actions e publicada no GHCR. A VPS só faz `podman pull`.
 
-### Pré-requisito: configurar Secrets no GitHub
+### Pré-requisito 1: tornar o pacote GHCR público
+
+Após o primeiro push do workflow `deploy-api.yml` ter sucesso (job `build-and-push`):
+
+1. Acessar https://github.com/samuelpanzera?tab=packages
+2. Clicar em `portfolio-api`
+3. **Package settings** → **Change visibility** → **Public**
+
+Sem isso, o `podman pull` na VPS falha com `unauthorized: authentication required`.
+
+### Pré-requisito 2: configurar Secrets no GitHub
 
 No repositório GitHub → **Settings → Secrets and variables → Actions**, adicionar:
 
 | Secret | Valor |
 |---|---|
 | `VPS_HOST` | IP da VPS |
-| `VPS_SSH_KEY` | Conteúdo da chave privada SSH (`~/.ssh/id_rsa` ou similar) |
+| `VPS_SSH_USER` | `deploy` (usuário criado no Passo 0.5 abaixo) |
+| `VPS_SSH_KEY` | Conteúdo da chave privada SSH dedicada para deploy |
 
 O `GITHUB_TOKEN` é automático — não precisa criar.
+
+### Passo 0.5 — Criar usuário `deploy` na VPS (uma vez)
+
+```bash
+useradd -m -s /bin/bash deploy
+mkdir -p /home/deploy/.ssh
+
+# Cole a chave pública SSH gerada localmente
+cat > /home/deploy/.ssh/authorized_keys << 'EOF'
+SUA_CHAVE_PUBLICA_AQUI
+EOF
+
+chmod 700 /home/deploy/.ssh
+chmod 600 /home/deploy/.ssh/authorized_keys
+chown -R deploy:deploy /home/deploy/.ssh
+
+# Permitir podman e systemctl sem senha
+cat > /etc/sudoers.d/deploy << 'EOF'
+deploy ALL=(ALL) NOPASSWD: /usr/bin/podman, /bin/systemctl
+EOF
+chmod 440 /etc/sudoers.d/deploy
+```
 
 ### Primeiro deploy manual (antes do CI/CD estar rodando)
 
 ```bash
-# Baixar a imagem publicada pelo GitHub Actions
+# Baixar a imagem (requer pacote GHCR público — veja Pré-requisito 1)
 podman pull ghcr.io/samuelpanzera/portfolio-api:latest
 
 # Rodar o container
 podman run -d \
   --name portfolio-api \
-  --restart always \
   -p 127.0.0.1:3000:3000 \
   -e PORT=3000 \
   ghcr.io/samuelpanzera/portfolio-api:latest
@@ -252,10 +284,23 @@ podman ps
 podman logs portfolio-api
 ```
 
-### Auto-start no boot (sem daemon)
+### Auto-start no boot + integração com CI/CD
+
+> O flag `--new` é **crítico**: faz o systemd recriar o container do zero a cada start, lendo a imagem mais recente. Sem `--new`, o `systemctl restart` apenas reinicia o container antigo, e a imagem nova nunca toma efeito.
 
 ```bash
-podman generate systemd --name portfolio-api --restart-policy=always --files
+# Para o container manual antes de gerar o unit
+podman stop portfolio-api && podman rm portfolio-api
+
+# Gera unit file que recria o container a cada start
+podman create \
+  --name portfolio-api \
+  -p 127.0.0.1:3000:3000 \
+  -e PORT=3000 \
+  ghcr.io/samuelpanzera/portfolio-api:latest
+
+podman generate systemd --new --name portfolio-api --restart-policy=always --files
+
 mv container-portfolio-api.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable container-portfolio-api
@@ -266,24 +311,33 @@ systemctl status container-portfolio-api
 ### Deploys futuros (automático via CI/CD)
 
 Qualquer push em `apps/backend/**` no branch `master` dispara o workflow `.github/workflows/deploy-api.yml`, que:
-1. Builda a imagem
-2. Faz push para `ghcr.io/samuelpanzera/portfolio-api:latest`
-3. Conecta na VPS via SSH e reinicia o container
+1. Builda a imagem com cache
+2. Faz push para `ghcr.io/samuelpanzera/portfolio-api:latest` + tag com SHA
+3. Conecta na VPS via SSH como `deploy` e roda:
+   ```bash
+   sudo podman pull ghcr.io/samuelpanzera/portfolio-api:latest
+   sudo systemctl restart container-portfolio-api
+   ```
 
 ---
 
 ## 6. Frontend estático
 
-> Buildado pelo GitHub Actions e enviado via SCP. Para o primeiro deploy, faça manualmente:
+> Buildado pelo GitHub Actions e enviado via rsync (com `--delete` — remove arquivos antigos órfãos). Para o primeiro deploy, faça manualmente:
 
 ```bash
 # Rodar LOCALMENTE:
-scp -r apps/frontend/dist/* root@<IP_DA_VPS>:/var/www/portfolio/
+rsync -avz --delete apps/frontend/dist/ deploy@<IP_DA_VPS>:/var/www/portfolio/
 ```
+
+> O `deploy` user precisa ter permissão de escrita em `/var/www/portfolio/`. Na VPS:
+> ```bash
+> chown -R deploy:deploy /var/www/portfolio
+> ```
 
 ### Deploys futuros (automático via CI/CD)
 
-Qualquer push em `apps/frontend/**` no branch `master` dispara `.github/workflows/deploy-frontend.yml`, que builda e envia o `dist/` para a VPS automaticamente.
+Qualquer push em `apps/frontend/**` no branch `master` dispara `.github/workflows/deploy-frontend.yml`, que builda e envia o `dist/` para a VPS via rsync com `--delete`.
 
 ---
 
