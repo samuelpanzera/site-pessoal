@@ -3,7 +3,20 @@
     "allow": [
       "WebFetch(domain:github.com)",
       "mcp__context7__resolve-library-id",
-      "mcp__context7__query-docs"
+      "mcp__context7__query-docs",
+      "Bash(go run *)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8443)",
+      "Bash(tasklist /FI \"PID eq 18016\")",
+      "PowerShell(Get-Process -Id 18016)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8443)",
+      "PowerShell(Get-Process | Where-Object { $_.Id -eq 18016 })",
+      "PowerShell(Stop-Process -Id 18016 -Force)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8443 -ErrorAction SilentlyContinue)",
+      "Bash(bun run *)",
+      "WebFetch(domain:localhost)",
+      "Bash(git add *)",
+      "Bash(git commit -m '@ *)"
     ]
   }
 }

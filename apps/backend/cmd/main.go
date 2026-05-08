@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
@@ -13,7 +14,13 @@ import (
 	"github.com/samuel/pdipessoal/backend/internal/service"
 )
 
-const addr = ":8443"
+func addr() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+	return ":" + port
+}
 
 func main() {
 	// --- Camada de dependências (DIP) ---
@@ -60,8 +67,9 @@ func main() {
 	})
 
 	// --- Iniciar Servidor ---
-	log.Printf("🚀 Servidor rodando em http://localhost%s\n", addr)
-	if err := app.Listen(addr); err != nil {
+	a := addr()
+	log.Printf("Servidor rodando em http://localhost%s\n", a)
+	if err := app.Listen(a); err != nil {
 		log.Fatalf("Erro ao iniciar o servidor: %v", err)
 	}
 }

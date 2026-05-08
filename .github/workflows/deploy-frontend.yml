@@ -1,0 +1,35 @@
+name: Build & Deploy Frontend
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - apps/frontend/**
+      - .github/workflows/deploy-frontend.yml
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build --filter=frontend
+
+      - name: Upload para VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: apps/frontend/dist/*
+          target: /var/www/portfolio
+          strip_components: 3

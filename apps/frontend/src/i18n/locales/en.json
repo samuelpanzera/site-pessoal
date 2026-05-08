@@ -5,7 +5,8 @@
     "contact": "Contact",
     "pdi_access": "PDI Access",
     "tech_stack": "Tech Stack",
-    "experiences": "Experiences"
+    "experiences": "Experiences",
+    "blog": "Blog"
   },
   "hero": {
     "title": "Architecting <1/> <2>Reliable</2> Backends",
@@ -55,7 +56,7 @@
     "title": "Personal Development",
     "title_highlight": "System (PDI)",
     "description": "Access the restricted dashboard to track career milestones, learning objectives, and technical evolution logs. Authorized members only.",
-    "authenticate": "Authenticate with Google"
+    "coming_soon": "Coming Soon"
   },
   "footer": {
     "description": "Architecting the future of distributed systems through precision, performance, and minimal overhead. A back-end perspective on software engineering.",
@@ -63,20 +64,8 @@
     "connectivity": "Connectivity",
     "oled_friendly": "OLED FRIENDLY",
     "system_ready": "SYSTEM READY",
-    "version": "DEV_VOID PORTFOLIO V1.0.0"
-  },
-  "mock_auth": {
-    "title": "Authentication in Progress",
-    "cancel": "Cancel Operation",
-    "success": "[DONE] Success",
-    "messages": [
-      "Contacting Google Auth Servers...",
-      "Verifying system permissions...",
-      "Checking channel membership status...",
-      "Establishing secure encrypted tunnel...",
-      "Finalizing PDI handshake..."
-    ],
-    "alert": "Access Granted: This is a prototype. In production, you would be redirected to the PDI Dashboard."
+    "version": "DEV_VOID PORTFOLIO V1.0.0",
+    "last_updated": "Last updated"
   },
   "arch": {
     "labels": {

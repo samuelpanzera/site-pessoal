@@ -1,0 +1,59 @@
+name: Build & Deploy API
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - apps/backend/**
+      - .github/workflows/deploy-api.yml
+
+env:
+  IMAGE: ghcr.io/samuelpanzera/portfolio-api
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./apps/backend
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy na VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            podman pull ghcr.io/samuelpanzera/portfolio-api:latest
+            podman stop portfolio-api || true
+            podman rm portfolio-api || true
+            podman run -d \
+              --name portfolio-api \
+              --restart always \
+              -p 127.0.0.1:3000:3000 \
+              -e PORT=3000 \
+              ghcr.io/samuelpanzera/portfolio-api:latest

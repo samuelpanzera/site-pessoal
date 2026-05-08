@@ -2,11 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
-interface NavigationProps {
-  onAccessClick: () => void;
-}
-
-const Navigation: React.FC<NavigationProps> = ({ onAccessClick }) => {
+const Navigation: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -18,12 +14,21 @@ const Navigation: React.FC<NavigationProps> = ({ onAccessClick }) => {
         <a href="#" className="text-on-surface hover:text-primary transition-colors">{t('nav.home')}</a>
         <a href="#" className="hover:text-primary transition-colors">{t('nav.projects')}</a>
         <a href="#" className="hover:text-primary transition-colors">{t('nav.contact')}</a>
+        <span
+          className="flex items-center gap-1.5 opacity-40 cursor-not-allowed select-none"
+          title="Em breve"
+        >
+          {t('nav.blog')}
+          <span className="text-[9px] font-bold uppercase tracking-widest text-primary border border-primary/40 px-1 py-px rounded leading-tight">
+            SOON
+          </span>
+        </span>
       </div>
       <div className="flex-1 flex justify-end items-center gap-4">
         <LanguageSwitcher />
-        <button 
-          onClick={onAccessClick}
-          className="cursor-pointer px-4 py-2 rounded-md border border-primary-container text-xs font-bold uppercase tracking-widest hover:bg-primary/10 transition-all border-glow"
+        <button
+          disabled
+          className="cursor-not-allowed px-4 py-2 rounded-md border border-primary-container/30 text-xs font-bold uppercase tracking-widest opacity-50"
         >
           {t('nav.pdi_access')}
         </button>

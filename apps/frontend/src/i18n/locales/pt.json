@@ -5,7 +5,8 @@
     "contact": "Contato",
     "pdi_access": "PDI Access",
     "tech_stack": "Stack Técnica",
-    "experiences": "Experiências"
+    "experiences": "Experiências",
+    "blog": "Blog"
   },
   "hero": {
     "title": "Arquitetando <1/> Backends <2>Confiáveis</2>",
@@ -55,7 +56,7 @@
     "title": "Sistema de Desenvolvimento",
     "title_highlight": "Pessoal (PDI)",
     "description": "Acesse o dashboard restrito para acompanhar marcos de carreira, objetivos de aprendizado e logs de evolução técnica. Apenas membros autorizados.",
-    "authenticate": "Autenticar com Google"
+    "coming_soon": "Em breve"
   },
   "footer": {
     "description": "Arquitetando o futuro de sistemas distribuídos através de precisão, performance e sobrecarga mínima. Uma perspectiva back-end sobre engenharia de software.",
@@ -63,20 +64,8 @@
     "connectivity": "Conectividade",
     "oled_friendly": "OLED FRIENDLY",
     "system_ready": "SISTEMA PRONTO",
-    "version": "DEV_VOID PORTFOLIO V1.0.0"
-  },
-  "mock_auth": {
-    "title": "Autenticação em Progresso",
-    "cancel": "Cancelar Operação",
-    "success": "[OK] Sucesso",
-    "messages": [
-      "Contatando Servidores Google Auth...",
-      "Verificando permissões do sistema...",
-      "Checando status de membro do canal...",
-      "Estabelecendo túnel seguro criptografado...",
-      "Finalizando handshake do PDI..."
-    ],
-    "alert": "Acesso Concedido: Este é um protótipo. Em produção, você seria redirecionado para o Dashboard do PDI."
+    "version": "DEV_VOID PORTFOLIO V1.0.0",
+    "last_updated": "Atualizado em"
   },
   "arch": {
     "labels": {

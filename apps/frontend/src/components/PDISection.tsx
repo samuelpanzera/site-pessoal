@@ -1,11 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface PDISectionProps {
-  onAccessClick: () => void;
-}
-
-const PDISection: React.FC<PDISectionProps> = ({ onAccessClick }) => {
+const PDISection: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -31,12 +27,12 @@ const PDISection: React.FC<PDISectionProps> = ({ onAccessClick }) => {
             {t('pdi.description')}
           </p>
           
-          <button 
-            onClick={onAccessClick}
-            className="cursor-pointer flex items-center gap-4 px-8 py-4 rounded-xl bg-white text-primary-container font-bold hover:gap-6 transition-all shadow-xl"
+          <button
+            disabled
+            className="cursor-not-allowed flex items-center gap-4 px-8 py-4 rounded-xl bg-white/30 text-white font-bold opacity-50"
           >
-            {t('pdi.authenticate')}
-            <span className="text-xl">→</span>
+            {t('pdi.coming_soon')}
+            <span className="text-xl">🔒</span>
           </button>
         </div>
         

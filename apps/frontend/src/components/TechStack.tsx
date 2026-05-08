@@ -1,18 +1,43 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+  SiOpenai,
+  SiNodedotjs,
+  SiTypescript,
+  SiJavascript,
+  SiReact,
+  SiGo,
+  SiRust,
+} from 'react-icons/si';
+import { FaAws } from 'react-icons/fa6';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
+
+interface SkillIcon {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+}
 
 interface SkillProps {
   name: string;
   levelText: string;
   percentage: number;
+  icons?: SkillIcon[];
 }
 
-const SkillBar: React.FC<SkillProps> = ({ name, levelText, percentage }) => {
+const SkillBar: React.FC<SkillProps> = ({ name, levelText, percentage, icons }) => {
   return (
     <div className="space-y-3">
       <div className="flex justify-between text-sm font-bold uppercase tracking-widest text-on-surface-variant">
-        <span>{name}</span>
+        <span className="flex items-center gap-2">
+          {icons && (
+            <span className="flex items-center gap-1.5">
+              {icons.map(({ icon: Icon, label }) => (
+                <Icon key={label} className="text-xl text-primary opacity-75 transition-opacity hover:opacity-100" />
+              ))}
+            </span>
+          )}
+          {name}
+        </span>
         <span className="text-primary">{levelText}</span>
       </div>
       <div className="h-2 w-full bg-white/5 rounded-full relative overflow-hidden">
@@ -88,12 +113,46 @@ const TechStack: React.FC = () => {
   const { t } = useTranslation();
 
   const skills = [
-    { name: 'IA', levelKey: 'expert', percentage: 100 },
-    { name: 'Node / TS / JS', levelKey: 'expert', percentage: 100 },
-    { name: 'React', levelKey: 'intermediate', percentage: 50 },
-    { name: 'Golang', levelKey: 'intermediate', percentage: 50 },
-    { name: 'AWS', levelKey: 'intermediate', percentage: 50 },
-    { name: 'Rust', levelKey: 'learning', percentage: 25 },
+    {
+      name: 'IA',
+      levelKey: 'expert',
+      percentage: 100,
+      icons: [{ icon: SiOpenai, label: 'OpenAI' }],
+    },
+    {
+      name: 'Node / TS / JS',
+      levelKey: 'expert',
+      percentage: 100,
+      icons: [
+        { icon: SiNodedotjs, label: 'Node.js' },
+        { icon: SiTypescript, label: 'TypeScript' },
+        { icon: SiJavascript, label: 'JavaScript' },
+      ],
+    },
+    {
+      name: 'React',
+      levelKey: 'intermediate',
+      percentage: 50,
+      icons: [{ icon: SiReact, label: 'React' }],
+    },
+    {
+      name: 'Golang',
+      levelKey: 'intermediate',
+      percentage: 50,
+      icons: [{ icon: SiGo, label: 'Go' }],
+    },
+    {
+      name: 'AWS',
+      levelKey: 'intermediate',
+      percentage: 50,
+      icons: [{ icon: FaAws, label: 'AWS' }],
+    },
+    {
+      name: 'Rust',
+      levelKey: 'learning',
+      percentage: 25,
+      icons: [{ icon: SiRust, label: 'Rust' }],
+    },
   ];
 
   return (
@@ -121,7 +180,7 @@ const TechStack: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 relative z-10">
         {skills.map((skill) => (
-          <SkillBar key={skill.name} name={skill.name} levelText={t(`tech_stack.criteria.${skill.levelKey}.title`)} percentage={skill.percentage} />
+          <SkillBar key={skill.name} name={skill.name} levelText={t(`tech_stack.criteria.${skill.levelKey}.title`)} percentage={skill.percentage} icons={skill.icons} />
         ))}
       </div>
     </section>
