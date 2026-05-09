@@ -23,6 +23,7 @@ jobs:
           source: infra/nginx/sites/*
           target: /etc/nginx/sites-available/
           strip_components: 3
+          overwrite: true
 
       - name: Test and reload NGINX
         uses: appleboy/ssh-action@v1
