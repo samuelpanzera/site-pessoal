@@ -25,15 +25,25 @@ jobs:
       - name: Build frontend
         run: bunx turbo build --filter=frontend
 
-      - name: Install rsync
-        run: sudo apt-get install -y rsync
-
-      - name: Deploy via rsync (com --delete)
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: Upload build to VPS
+        uses: appleboy/scp-action@v0.1.7
         with:
-          switches: -avzr --delete
-          path: apps/frontend/dist/
-          remote_path: /var/www/portfolio/
-          remote_host: ${{ secrets.VPS_HOST }}
-          remote_user: ${{ secrets.VPS_SSH_USER }}
-          remote_key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: apps/frontend/dist/*
+          target: /tmp/portfolio-dist/
+          strip_components: 3
+          overwrite: true
+
+      - name: Deploy to web root
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            sudo mkdir -p /var/www/portfolio
+            sudo rm -rf /var/www/portfolio/*
+            sudo cp -rT /tmp/portfolio-dist/ /var/www/portfolio/
+            sudo rm -rf /tmp/portfolio-dist/
