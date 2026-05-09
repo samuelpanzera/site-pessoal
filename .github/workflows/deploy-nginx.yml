@@ -14,22 +14,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sync configs to sites-available
+      - name: Sync configs to temp directory
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: infra/nginx/sites/*
-          target: /etc/nginx/sites-available/
+          target: /tmp/nginx-configs/
           strip_components: 3
           overwrite: true
 
-      - name: Test and reload NGINX
+      - name: Install configs and reload NGINX
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            sudo cp /tmp/nginx-configs/portfolio /etc/nginx/sites-available/portfolio
+            sudo cp /tmp/nginx-configs/portfolio-api /etc/nginx/sites-available/portfolio-api
             sudo nginx -t && sudo systemctl reload nginx
+            rm -rf /tmp/nginx-configs/

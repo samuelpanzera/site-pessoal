@@ -25,6 +25,9 @@ jobs:
       - name: Build frontend
         run: bunx turbo build --filter=frontend
 
+      - name: Install rsync
+        run: sudo apt-get install -y rsync
+
       - name: Deploy via rsync (com --delete)
         uses: burnett01/rsync-deployments@7.0.1
         with:
