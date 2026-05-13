@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
+import GlitchCycleText from './GlitchCycleText';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
+  const glitchWords = useMemo(
+    () => t('hero.glitch_words', { returnObjects: true }) as string[],
+    [t]
+  );
 
   return (
     <section className="relative min-h-screen flex items-center px-6 overflow-hidden mb-15">
@@ -19,7 +24,8 @@ const Hero: React.FC = () => {
               i18nKey="hero.title"
               components={{
                 1: <br />,
-                2: <span className="text-primary" />
+                2: <span className="text-primary" />,
+                3: <GlitchCycleText words={glitchWords} />
               }}
             />
           </h1>

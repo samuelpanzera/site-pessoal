@@ -9,7 +9,8 @@
     "blog": "Blog"
   },
   "hero": {
-    "title": "Arquitetando <1/> Backends <2>Confiáveis</2>",
+    "title": "Arquitetando <1/> <3/> <2>Confiáveis</2>",
+    "glitch_words": ["Backends", "Sistemas", "Soluções", "Backends"],
     "description": "Desenvolvedor Back-end apaixonado por sistemas de alta performance e arquiteturas distribuídas. Construindo a infraestrutura invisível que impulsiona a web moderna.",
     "view_projects": "Ver Projetos",
     "contact_me": "Fale Comigo"
