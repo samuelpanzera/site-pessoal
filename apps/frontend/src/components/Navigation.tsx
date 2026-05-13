@@ -7,10 +7,16 @@ const Navigation: React.FC = () => {
   const lastUpdated = import.meta.env.VITE_LAST_UPDATED;
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-background/80 backdrop-blur-md h-20 flex items-stretch px-6">
-      <div className="flex-1 flex flex-col justify-center font-space-grotesk">
+    <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-background/80 backdrop-blur-md h-16 flex items-center px-6">
+      <div className="flex-1 flex items-center justify-between font-space-grotesk">
+        <div className="font-bold text-xl tracking-tighter">
+          DEV<span className="text-primary-container">_</span>VOID
+        </div>
         {lastUpdated && (
-          <div className="flex items-center gap-1.5 mb-0.5">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[9px] uppercase tracking-widest text-on-surface-variant/50">
+              atualizado em
+            </span>
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
@@ -20,9 +26,6 @@ const Navigation: React.FC = () => {
             </span>
           </div>
         )}
-        <div className="font-bold text-xl tracking-tighter">
-          DEV<span className="text-primary-container">_</span>VOID
-        </div>
       </div>
       <div className="flex items-center gap-8 text-sm font-medium text-on-surface-variant">
         <a href="#" className="text-on-surface hover:text-primary transition-colors">{t('nav.home')}</a>
