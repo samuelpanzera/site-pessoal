@@ -9,7 +9,8 @@
     "blog": "Blog"
   },
   "hero": {
-    "title": "Architecting <1/> <2>Reliable</2> Backends",
+    "title": "Architecting <1/> <2>Reliable</2> <3/>",
+    "glitch_words": ["Backends", "Systems", "Solutions", "Backends"],
     "description": "Back-end Developer with a passion for high-performance systems and distributed architectures. Crafting the invisible infrastructure that powers the modern web.",
     "view_projects": "View Projects",
     "contact_me": "Contact Me"
