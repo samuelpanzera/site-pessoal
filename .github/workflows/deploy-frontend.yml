@@ -22,7 +22,13 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Set build date
+        id: date
+        run: echo "date=$(date +'%b %d, %Y' | tr '[:lower:]' '[:upper:]')" >> $GITHUB_OUTPUT
+
       - name: Build frontend
+        env:
+          VITE_LAST_UPDATED: ${{ steps.date.outputs.date }}
         run: bunx turbo build --filter=frontend
 
       - name: Upload build to VPS

@@ -4,11 +4,25 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 
 const Navigation: React.FC = () => {
   const { t } = useTranslation();
+  const lastUpdated = import.meta.env.VITE_LAST_UPDATED;
 
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-background/80 backdrop-blur-md h-16 flex items-center px-6">
-      <div className="flex-1 font-space-grotesk font-bold text-xl tracking-tighter">
-        DEV<span className="text-primary-container">_</span>VOID
+      <div className="flex-1 flex items-center font-space-grotesk font-bold text-xl tracking-tighter">
+        <div>
+          DEV<span className="text-primary-container">_</span>VOID
+        </div>
+        {lastUpdated && (
+          <div className="flex items-center gap-1.5 ml-3">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-container" />
+            </span>
+            <span className="font-space-grotesk text-[10px] uppercase tracking-widest text-on-surface-variant/50">
+              {lastUpdated}
+            </span>
+          </div>
+        )}
       </div>
       <div className="flex gap-8 text-sm font-medium text-on-surface-variant">
         <a href="#" className="text-on-surface hover:text-primary transition-colors">{t('nav.home')}</a>
