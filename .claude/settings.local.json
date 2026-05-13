@@ -19,7 +19,18 @@
       "Bash(git commit -m '@ *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "Bash(git commit -m 'docs: add comprehensive deployment and infrastructure guide *)"
+      "Bash(git commit -m 'docs: add comprehensive deployment and infrastructure guide *)",
+      "Bash(Get-ChildItem -Path \"D:\\\\Projetos\\\\Typescript\\\\pdipessoal\\\\infra\" -Recurse -File)",
+      "Bash(Select-Object FullName)",
+      "Bash(ConvertTo-Json)",
+      "Bash(curl -sI https://api.samuelpanzera.com.br/)",
+      "Bash(curl -v --max-time 10 https://api.samuelpanzera.com.br/)",
+      "Bash(curl -v --max-time 10 http://api.samuelpanzera.com.br/)",
+      "Bash(curl -v --max-time 10 https://samuelpanzera.com.br/)",
+      "Bash(gh run *)",
+      "Bash(curl -sI http://api.samuelpanzera.com.br/)",
+      "WebSearch",
+      "Bash(git pull *)"
     ]
   }
 }
