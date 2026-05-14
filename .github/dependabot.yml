@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Mantém as dependências do repositório inteiro atualizadas (Root e Workspaces)
+  - package-ecosystem: "npm" 
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    
+    # Opções extras para facilitar a gerência
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+    # Ignora atualizações de pacotes que possam ter problemas conhecidos ou para evitar muito barulho em Major updates
+    # ignore:
+    #   - dependency-name: "algum-pacote-especifico"
+    #     update-types: ["version-update:semver-major"]

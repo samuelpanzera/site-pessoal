@@ -1,28 +1,44 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 const Navigation: React.FC = () => {
-  const { t } = useTranslation();
-  const lastUpdated = import.meta.env.VITE_LAST_UPDATED;
+  const { t, i18n } = useTranslation();
+  const lastUpdatedRaw = import.meta.env.VITE_LAST_UPDATED;
+
+  const formattedDate = useMemo(() => {
+    if (!lastUpdatedRaw) return '';
+    try {
+      const date = new Date(lastUpdatedRaw);
+      if (isNaN(date.getTime())) return lastUpdatedRaw;
+      
+      const locale = i18n.language === 'pt' ? 'pt-BR' : 'en-US';
+      const formatted = date.toLocaleDateString(locale, {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric'
+      });
+      
+      return formatted.replace('.', '').toUpperCase();
+    } catch (e) {
+      return lastUpdatedRaw;
+    }
+  }, [lastUpdatedRaw, i18n.language]);
 
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-background/80 backdrop-blur-md h-16 flex items-center px-6">
-      <div className="flex-1 flex items-center justify-between font-space-grotesk">
+      <div className="flex-1 flex items-center gap-4 font-space-grotesk">
         <div className="font-bold text-xl tracking-tighter">
           DEV<span className="text-primary-container">_</span>VOID
         </div>
-        {lastUpdated && (
-          <div className="flex items-center gap-1.5">
-            <span className="text-[9px] uppercase tracking-widest text-on-surface-variant/50">
-              atualizado em
+        {lastUpdatedRaw && (
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-primary-container/40 bg-primary-container/5">
+            <span className="text-[9px] uppercase tracking-widest text-on-surface-variant/70">
+              {t('footer.last_updated')} {formattedDate}
             </span>
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
-            </span>
-            <span className="text-[9px] uppercase tracking-widest text-on-surface-variant/50">
-              {lastUpdated}
             </span>
           </div>
         )}
