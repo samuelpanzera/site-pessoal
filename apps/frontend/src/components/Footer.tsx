@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="col-span-2 space-y-6">
           <div className="font-space-grotesk font-bold text-2xl tracking-tighter">
-            DEV<span className="text-primary-container">_</span>VOID
+            S.<span className="text-primary-container">_</span>PANZERA
           </div>
           <p className="max-w-sm text-on-surface-variant text-sm leading-relaxed">
             {t('footer.description')}

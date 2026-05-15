@@ -6,7 +6,7 @@
     "pdi_access": "PDI Access",
     "tech_stack": "Stack Técnica",
     "experiences": "Experiências",
-    "blog": "Blog"
+    "tech_details": "Detalhes Técnicos"
   },
   "hero": {
     "title": "Arquitetando <1/> <3/> <2>Confiáveis</2>",
@@ -65,7 +65,7 @@
     "connectivity": "Conectividade",
     "oled_friendly": "OLED FRIENDLY",
     "system_ready": "SISTEMA PRONTO",
-    "version": "DEV_VOID PORTFOLIO V1.0.0",
+    "version": "PANZERA PORTFOLIO V1.0.0",
     "last_updated": "Atualizado em"
   },
   "arch": {
@@ -82,6 +82,32 @@
       "docker": "Docker",
       "k8s": "Kubernetes",
       "aws": "AWS Cloud"
+    }
+  },
+  "blog": {
+    "title": "LOGS",
+    "title_highlight": "Técnicos",
+    "description": "Explorações técnicas, decisões de arquitetura e a evolução deste ecossistema. Um mergulho profundo em engenharia de sistemas e performance.",
+    "read_more": "Ler Artigo",
+    "back_to_blog": "Voltar",
+    "posts": {
+      "void-architecture": {
+        "title": "Infraestrutura e Performance: Do Conceito à Produção",
+        "date": "2024-05-14",
+        "summary": "Como construímos um sistema de alta performance utilizando Bun, Go e Podman em uma infraestrutura minimalista.",
+        "content": {
+          "podman_title": "A infraestrutura: VPS, Podman e Nginx",
+          "podman_content": "Operar um sistema de alta performance em uma infraestrutura com 70GB de SSD, 2vCPUs e 4GB de RAM exige mais do que apenas código limpo; exige uma estratégia de infraestrutura cirúrgica. Nesse cenário, cada ciclo de CPU e cada megabyte de memória RAM são tratados como recursos preciosos. A decisão de utilizar o Podman em detrimento do Docker tradicional foi o primeiro passo crítico nessa jornada de otimização.\n\nA questão principal aqui não é apenas rodar este portfólio. O objetivo real e ambicioso é HOSPEDAR TODOS os projetos existentes e futuros nesta mesma infraestrutura. Estamos falando de um ecossistema completo rodando sob as mesmas restrições. É por isso que cada bit importa, cada processo ocioso é um inimigo e cada otimização é uma vitória estratégica para garantir que a máquina suporte o crescimento de todo o meu portfólio de aplicações.\n\nUma decisão que pode parecer controversa para os puristas de containers é a utilização do Nginx diretamente no host, e não via container. O motivo? Performance bruta e simplicidade de roteamento. Ao rodar o Nginx nativamente, eliminamos qualquer camada adicional de rede ou bridge que o Podman pudesse introduzir, garantindo que o tempo de resposta seja o menor fisicamente possível. Além disso, como o Nginx é a nossa 'porta de entrada' para TODOS os projetos que residem nesta VPS, tê-lo no host facilita drasticamente a gestão de certificados SSL via Certbot e o roteamento dinâmico para diferentes containers, sem a complexidade de redes internas de containers cruzadas.\n\nO Podman brilha por ser daemonless. Enquanto o Docker exige um processo central rodando com privilégios de root o tempo todo, consumindo recursos mesmo quando ocioso, o Podman opera de forma muito mais direta, integrando-se nativamente ao systemd. Isso não só reduz a superfície de ataque através de containers rootless, mas também elimina o overhead constante do Docker daemon, permitindo que a nossa VPS respire melhor e foque o processamento no que realmente importa: a execução estável de múltiplos projetos simultâneos.",
+          "ci_cd_title": "Automação: CI/CD e Dependabot",
+          "ci_cd_content": "Em um projeto que preza pela precisão, o deploy manual é um pecado capital. Por isso, implementamos uma linha de produção completamente automatizada utilizando GitHub Actions. Cada commit na branch principal desencadeia uma sinfonia de eventos: o código é validado, os artefatos são construídos (seja o binário Go ou o bundle React) e o deploy é executado diretamente na nossa VPS via SSH, de forma silenciosa e eficiente.\n\nMas a automação não para no deploy. O Dependabot atua como uma sentinela incansável, vigiando cada biblioteca e dependência do nosso ecossistema. Ele não apenas nos avisa sobre vulnerabilidades, mas abre pull requests automáticos que são testados pelos nossos pipelines de CI. Isso nos permite manter o projeto sempre no estado da arte da segurança e performance, sem o fardo da manutenção manual exaustiva.\n\nEssa cultura de automação permite que o foco permaneça onde realmente importa: na evolução do produto. Saber que a infraestrutura é capaz de se auto-gerenciar e que o processo de atualização é robusto nos dá a liberdade criativa necessária para testar novas ideias, sabendo que a 'sentinela' está sempre de olho em qualquer potencial instabilidade ou dívida técnica que possa surgir.",
+          "performance_title": "Por que Bun e Go?",
+          "performance_content": "Quando falamos de performance, o Bun e o Go são os protagonistas indiscutíveis. No lado do front-end, o Bun revolucionou completamente a forma como trabalhamos com ecossistema Javascript. Ele não apenas acelerou os tempos de build de minutos para poucos segundos, mas trouxe uma coesão incrível ao kit de ferramentas, eliminando a necessidade de múltiplos pacotes fragmentados para testes, build e execução.\n\nJá no back-end, a precisão e a sobriedade do Go com o framework Fiber formam a espinha dorsal do sistema. O Go foi escolhido por sua capacidade lendária de gerenciar concorrência através de goroutines com um footprint de memória ínfimo. Em uma máquina com 4GB de RAM que precisa suportar múltiplos projetos, não podemos nos dar ao luxo de rodar runtimes pesados que demoram para liberar memória ou que sofrem com pausas longas de Garbage Collection.\n\nO resultado dessa combinação é um sistema que responde em milissegundos e mantém uma estabilidade linear, mesmo sob carga. O Go nos dá a segurança de um sistema tipado e a velocidade de execução próxima ao C++, enquanto o Bun garante que o desenvolvimento do front-end seja ágil e que os artefatos gerados sejam os mais otimizados possíveis para o navegador do usuário final.",
+          "frontend_title": "O desafio do front-end (e os prompts kkk)",
+          "frontend_content": "Vou ser honesto com você: no início deste projeto, meu conhecimento sobre como implementar animações complexas no front-end era praticamente nulo. Eu tinha ideias visuais ambiciosas, inspiradas em interfaces de ficção científica e dashboards de alta performance, mas não fazia a menor ideia de como traduzir isso para código React que fosse fluido e não destruísse a performance do navegador.\n\nFoi aqui que a jornada ficou interessante (e um pouco frustrante kkk). Foram necessários MUITOS prompts, centenas de tentativas e erros, e uma persistência quase teimosa para entender como o Framer Motion e o ciclo de vida do React trabalham juntos. Houve momentos em que uma simples transição de tela parecia um enigma impossível, resultando em conversas longas com o assistente e risadas de desespero ao ver a tela quebrar de formas criativas kkk.\n\nNo entanto, o aprendizado foi transformador. Masterizar o equilíbrio entre estética 'Premium' e performance técnica foi o grande prêmio. Conseguir manter o Lighthouse em 100% enquanto implementamos efeitos de glassmorphism, micro-interações de hover e transições suaves a 60fps foi a prova de que, com a ajuda certa dos prompts e muita insistência, é possível criar interfaces que parecem 'mágicas' para quem olha, mas que são puramente lógicas por baixo do capô.",
+          "future_title": "O que vem por aí: SQLite e testes",
+          "future_content": "Este ecossistema está apenas em sua fase inicial. O horizonte que vislumbramos envolve a transição para uma persistência de dados mais robusta, mas sem perder nossa filosofia de baixo overhead. O próximo grande passo é a integração do SQLite. Longe de ser um banco de dados 'de brinquedo', o SQLite moderno, configurado com modo WAL e rodando em nossos SSDs rápidos, oferece uma performance transacional que rivaliza com bancos cliente-servidor muito mais pesados.\n\nAlém da persistência, o foco futuro será a criação de um verdadeiro império de testes. A estabilidade que temos hoje é ótima, mas queremos que ela seja garantida por código, não por sorte. A implementação de testes unitários rigorosos no back-end em Go e testes E2E (End-to-End) no front-end será a nossa principal defesa contra regressões à medida que adicionamos novas funcionalidades e o sistema escala em complexidade.\n\nA ideia é que este portfólio se torne uma referência pessoal de engenharia: um sistema que prova que você não precisa de orçamentos de nuvem infinitos ou arquiteturas de microserviços excessivamente complexas para entregar um produto de nível internacional. É sobre a elegância da simplicidade e o poder da otimização contínua. O futuro é leve e rápido.\n\nRust? será?"
+        }
+      }
     }
   }
 }

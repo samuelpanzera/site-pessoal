@@ -1,9 +1,12 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 const Navigation: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const lastUpdatedRaw = import.meta.env.VITE_LAST_UPDATED;
 
   const formattedDate = useMemo(() => {
@@ -28,9 +31,9 @@ const Navigation: React.FC = () => {
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-background/80 backdrop-blur-md h-16 flex items-center px-6">
       <div className="flex-1 flex items-center gap-4 font-space-grotesk">
-        <div className="font-bold text-xl tracking-tighter">
-          DEV<span className="text-primary-container">_</span>VOID
-        </div>
+        <Link to="/" className="font-bold text-xl tracking-tighter hover:text-primary transition-colors">
+          S.<span className="text-primary-container">_</span>PANZERA
+        </Link>
         {lastUpdatedRaw && (
           <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-primary-container/40 bg-primary-container/5">
             <span className="text-[9px] uppercase tracking-widest text-on-surface-variant/70">
@@ -44,8 +47,17 @@ const Navigation: React.FC = () => {
         )}
       </div>
       <div className="flex items-center gap-8 text-sm font-medium text-on-surface-variant">
-        <a href="#hero" className="text-on-surface hover:text-primary transition-colors">{t('nav.home')}</a>
-        <a href="#projetos" className="hover:text-primary transition-colors">{t('nav.projects')}</a>
+        {isHome ? (
+          <>
+            <a href="#hero" className="text-on-surface hover:text-primary transition-colors">{t('nav.home')}</a>
+            <a href="#projetos" className="hover:text-primary transition-colors">{t('nav.projects')}</a>
+          </>
+        ) : (
+          <>
+            <Link to="/" className="text-on-surface hover:text-primary transition-colors">{t('nav.home')}</Link>
+            <Link to="/#projetos" className="hover:text-primary transition-colors">{t('nav.projects')}</Link>
+          </>
+        )}
         <a 
           href="https://linkedin.com/in/samuelpanzera" 
           target="_blank" 
@@ -57,15 +69,12 @@ const Navigation: React.FC = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
         </a>
-        <span
-          className="flex items-center gap-1.5 opacity-40 cursor-not-allowed select-none"
-          title="Em breve"
+        <Link 
+          to="/tech-details-pdi" 
+          className={`hover:text-primary transition-colors ${location.pathname.startsWith('/tech-details-pdi') ? 'text-primary' : ''}`}
         >
-          {t('nav.blog')}
-          <span className="text-[9px] font-bold uppercase tracking-widest text-primary border border-primary/40 px-1 py-px rounded leading-tight">
-            SOON
-          </span>
-        </span>
+          {t('nav.tech_details')}
+        </Link>
       </div>
       <div className="flex-1 flex justify-end items-center gap-4">
         <LanguageSwitcher />
