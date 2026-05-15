@@ -10,7 +10,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, techStack
   const { t } = useTranslation();
 
   return (
-    <div className="group p-8 rounded-xl bg-surface-container border border-white/5 hover:border-primary/50 transition-all duration-300 hover:glow-purple flex flex-col h-full">
+    <div className="group p-6 md:p-8 rounded-xl bg-surface-container border border-white/5 hover:border-primary/50 transition-all duration-300 hover:glow-purple flex flex-col h-full">
       <div className="flex-1 space-y-4">
         <div className="h-1 w-12 bg-primary/20 group-hover:bg-primary transition-colors duration-300" />
         <h3 className="text-2xl font-space-grotesk font-bold tracking-tight group-hover:text-primary transition-colors">
@@ -48,12 +48,12 @@ const Projects: React.FC = () => {
   const sorted = [...projects].sort((a, b) => a.order - b.order);
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto space-y-12">
+    <section className="py-16 md:py-24 px-6 max-w-7xl mx-auto space-y-12">
       <div className="space-y-4">
-        <h2 className="text-4xl font-space-grotesk font-bold tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-space-grotesk font-bold tracking-tight">
           {t('projects.title')} <span className="text-primary-container">{t('projects.title_highlight')}</span>
         </h2>
-        <p className="max-w-xl text-on-surface-variant">
+        <p className="max-w-xl text-on-surface-variant text-sm md:text-base">
           {t('projects.description')}
         </p>
       </div>

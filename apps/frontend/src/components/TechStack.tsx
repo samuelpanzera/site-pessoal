@@ -156,24 +156,23 @@ const TechStack: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 px-6 max-w-5xl mx-auto relative">
-      {/* Watermark text */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 flex items-start justify-center pt-16 ">
-        <span className="text-[6rem] md:text-[10rem] font-space-grotesk font-black text-white/[0.03] uppercase tracking-tighter leading-none">
+    <section className="py-20 md:py-32 px-6 max-w-5xl mx-auto relative">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 flex items-start justify-center pt-8 md:pt-16">
+        <span className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-space-grotesk font-black text-white/[0.03] uppercase tracking-tighter leading-none select-none">
           Skills
         </span>
       </div>
 
-      <div className="text-center mb-24 relative z-10">
+      <div className="text-center mb-16 md:mb-24 relative z-10">
         <div className="flex items-center justify-center gap-3">
-          <h2 className="text-4xl md:text-5xl font-space-grotesk font-bold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-space-grotesk font-bold tracking-tight">
             {t('tech_stack.title_prefix')} <span className="text-primary">{t('tech_stack.title_highlight')}</span>
           </h2>
           <div className="mt-1">
             <CriteriaPopup />
           </div>
         </div>
-        <p className="text-on-surface-variant leading-relaxed max-w-2xl mx-auto mt-10">
+        <p className="text-on-surface-variant leading-relaxed max-w-2xl mx-auto mt-6 md:mt-10 text-sm md:text-base">
           {t('tech_stack.description')}
         </p>
       </div>

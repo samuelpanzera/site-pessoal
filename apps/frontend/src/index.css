@@ -46,7 +46,7 @@
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
 
-  --spacing-section-gap: 8rem;
+  --spacing-section-gap: clamp(4rem, 10vw, 8rem);
 }
 
 @layer base {
@@ -65,5 +65,9 @@
   }
   .border-glow {
     @apply border border-primary-container shadow-[0_0_15px_rgba(75,0,130,0.3)];
+  }
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: radial-gradient(circle, rgba(75, 0, 130, 0.2) 1.5px, transparent 1.5px);
   }
 }

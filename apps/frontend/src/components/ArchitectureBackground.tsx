@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef, memo, type ReactElement, useMemo } from 'react';
 import { motion, useMotionValue, useMotionTemplate, useReducedMotion, useTransform, useSpring } from 'motion/react';
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface ArchNode {
@@ -424,6 +425,7 @@ ConnectionComponent.displayName = 'ConnectionComponent';
 const ArchitectureBackground = () => {
   const { t } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useMediaQuery('(max-width: 1024px)');
 
   // Memoize nodes with translated labels
   const nodes = useMemo(() => NODES_DATA.map(node => ({
@@ -447,7 +449,7 @@ const ArchitectureBackground = () => {
 
   // Mouse tracking via window (background has z-index -10, so it never receives DOM mouse events)
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       // Spotlight in container-space
@@ -470,7 +472,7 @@ const ArchitectureBackground = () => {
 
   // Failure simulation — randomly toggle failure state
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isMobile) return;
 
     const failableNodes = nodes.filter(n => n.canFail).map(n => n.id);
     if (failableNodes.length === 0) return;
@@ -550,24 +552,28 @@ const ArchitectureBackground = () => {
         transition={{ duration: 1.5 }}
         style={{ willChange: 'auto', zIndex: 1 }}
       >
-        {/* SVG Filters */}
+        {/* SVG Filters - Only render full filters if not on mobile */}
         <defs>
-          <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
-            <feFlood floodColor={COLORS.fail} floodOpacity="0.6" result="color" />
-            <feComposite in="color" in2="blur" operator="in" result="shadow" />
-            <feMerge>
-              <feMergeNode in="shadow" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
+          {!isMobile && (
+            <>
+              <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
+                <feFlood floodColor={COLORS.fail} floodOpacity="0.6" result="color" />
+                <feComposite in="color" in2="blur" operator="in" result="shadow" />
+                <feMerge>
+                  <feMergeNode in="shadow" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </>
+          )}
 
           {/* Grid pattern */}
           <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -603,9 +609,9 @@ const ArchitectureBackground = () => {
           ))}
         </g>
 
-        {/* Decorative floating particles */}
+        {/* Decorative floating particles - Reduced count on mobile */}
         {!shouldReduceMotion &&
-          Array.from({ length: 15 }).map((_, i) => {
+          Array.from({ length: isMobile ? 5 : 15 }).map((_, i) => {
             const cx = 100 + Math.random() * 1200;
             const cy = 50 + Math.random() * 500;
             return (
