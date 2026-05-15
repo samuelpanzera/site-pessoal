@@ -3,7 +3,7 @@ name: Build & Deploy Frontend
 on:
   workflow_dispatch: {}
   push:
-    branches: [master, 'fix/**', 'feat/**']
+    branches: [master]
     paths:
       - apps/frontend/**
       - .github/workflows/deploy-frontend.yml
