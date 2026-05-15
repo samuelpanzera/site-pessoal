@@ -52,4 +52,5 @@ jobs:
             sudo mkdir -p /var/www/portfolio
             sudo rm -rf /var/www/portfolio/*
             sudo cp -rT /tmp/portfolio-dist/ /var/www/portfolio/
+            sudo systemctl reload nginx
             sudo rm -rf /tmp/portfolio-dist/
