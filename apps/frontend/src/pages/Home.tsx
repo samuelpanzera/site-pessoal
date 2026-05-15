@@ -20,7 +20,7 @@ function Home() {
         <section id="hero"><Hero /></section>
         <section id="techstack"><TechStack /></section>
         <Divider />
-        <section id="projects"><Projects /></section>
+        <section id="projetos"><Projects /></section>
         <Divider />
         <section id="experience"><Experience /></section>
         <Divider />
