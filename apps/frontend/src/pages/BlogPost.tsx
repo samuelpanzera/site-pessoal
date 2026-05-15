@@ -27,7 +27,7 @@ const BlogPost: React.FC = () => {
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          onClick={() => navigate('/tech-details-pdi')}
+          onClick={() => navigate('/blog')}
           className="group flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-12 text-sm font-bold uppercase tracking-widest"
         >
           <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

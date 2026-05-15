@@ -70,8 +70,8 @@ const Navigation: React.FC = () => {
           </svg>
         </a>
         <Link 
-          to="/tech-details-pdi" 
-          className={`hover:text-primary transition-colors ${location.pathname.startsWith('/tech-details-pdi') ? 'text-primary' : ''}`}
+          to="/blog" 
+          className={`hover:text-primary transition-colors ${location.pathname.startsWith('/blog') ? 'text-primary' : ''}`}
         >
           {t('nav.blog')}
         </Link>

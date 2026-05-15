@@ -52,7 +52,7 @@ const Blog: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 + index * 0.1 }}
               className="group relative p-8 rounded-2xl bg-surface-container border border-white/5 hover:border-primary/30 transition-all cursor-pointer overflow-hidden"
-              onClick={() => navigate(`/tech-details-pdi/${post.id}`)}
+              onClick={() => navigate(`/blog/${post.id}`)}
             >
               <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="text-primary text-xs font-bold uppercase tracking-widest border border-primary/40 px-2 py-1 rounded">
