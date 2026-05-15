@@ -6,7 +6,7 @@
     "pdi_access": "PDI Access",
     "tech_stack": "Tech Stack",
     "experiences": "Experiences",
-    "tech_details": "Tech Details"
+    "blog": "Blog"
   },
   "hero": {
     "title": "Architecting <1/> <2>Reliable</2> <3/>",
@@ -86,10 +86,10 @@
   },
   "blog": {
     "title": "TECHNICAL",
-    "title_highlight": "Logs",
+    "title_highlight": "Blog",
     "description": "Technical explorations, architecture decisions, and the evolution of this ecosystem. A deep dive into systems engineering and performance.",
     "read_more": "Read Article",
-    "back_to_blog": "Back",
+    "back_to_blog": "Back to Blog",
     "posts": {
       "void-architecture": {
         "title": "Infrastructure and Performance: From Concept to Production",

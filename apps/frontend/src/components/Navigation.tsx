@@ -73,7 +73,7 @@ const Navigation: React.FC = () => {
           to="/tech-details-pdi" 
           className={`hover:text-primary transition-colors ${location.pathname.startsWith('/tech-details-pdi') ? 'text-primary' : ''}`}
         >
-          {t('nav.tech_details')}
+          {t('nav.blog')}
         </Link>
       </div>
       <div className="flex-1 flex justify-end items-center gap-4">
