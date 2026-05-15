@@ -71,14 +71,14 @@
   "arch": {
     "labels": {
       "client": "Client",
-      "gateway": "API Gateway",
+      "gateway": "Load Balancer",
       "api": "REST API",
-      "lambda": "Lambda",
+      "lambda": "Functions",
       "server_a": "Backend A",
       "server_b": "Backend B",
       "rabbitmq": "RabbitMQ",
       "postgres": "PostgreSQL",
-      "redis": "Redis",
+      "redis": "Valkey",
       "docker": "Docker",
       "k8s": "Kubernetes",
       "aws": "AWS Cloud"
