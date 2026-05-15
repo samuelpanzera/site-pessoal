@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 const SECTION_TITLES: Record<string, string> = {
   hero: 'Samuel Panzera | Backend Developer',
   techstack: 'Samuel Panzera | Tech Stack',
-  projects: 'Samuel Panzera | Projects',
+  projetos: 'Samuel Panzera | Projects',
   experience: 'Samuel Panzera | Experience',
   pdi: 'Samuel Panzera | PDI',
 }

@@ -29,10 +29,10 @@ const Footer: React.FC = () => {
         <div className="space-y-6">
           <h5 className="text-xs font-bold uppercase tracking-widest text-white">{t('footer.navigation')}</h5>
           <ul className="space-y-3 text-sm text-on-surface-variant">
-            <li><a href="#" className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
-            <li><a href="#" className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
-            <li><a href="#" className="hover:text-primary transition-colors">{t('nav.tech_stack')}</a></li>
-            <li><a href="#" className="hover:text-primary transition-colors">{t('nav.execution_log')}</a></li>
+            <li><a href="#hero" className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
+            <li><a href="#projetos" className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
+            <li><a href="#techstack" className="hover:text-primary transition-colors">{t('nav.tech_stack')}</a></li>
+            <li><a href="#experience" className="hover:text-primary transition-colors">{t('nav.experiences')}</a></li>
           </ul>
         </div>
 

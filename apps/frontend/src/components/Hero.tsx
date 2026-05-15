@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
           </p>
           <div className="flex gap-4 pt-4">
             <a
-              href="#projects"
+              href="#projetos"
               className="cursor-pointer inline-flex items-center justify-center px-8 py-4 rounded-md bg-primary text-on-primary font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(221,183,255,0.3)]"
             >
               {t('hero.view_projects')}
