@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a
               href="#projetos"
-              className="cursor-pointer inline-flex items-center justify-center px-8 py-4 rounded-md bg-primary text-on-primary font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(221,183,255,0.3)] w-full sm:w-auto"
+              className="cursor-pointer inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 rounded-md bg-primary text-on-primary font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(221,183,255,0.3)] w-full sm:w-auto text-sm md:text-base"
             >
               {t('hero.view_projects')}
             </a>
@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
               href="https://linkedin.com/in/samuelpanzera"
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-pointer inline-flex items-center justify-center px-8 py-4 rounded-md border border-white/10 hover:border-white/20 transition-all w-full sm:w-auto"
+              className="cursor-pointer inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 rounded-md border border-white/10 hover:border-white/20 transition-all w-full sm:w-auto text-sm md:text-base"
             >
               {t('hero.contact_me')}
             </a>
