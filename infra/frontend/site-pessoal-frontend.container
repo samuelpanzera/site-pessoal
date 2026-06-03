@@ -1,0 +1,17 @@
+[Unit]
+Description=Site Pessoal Frontend (React/Vite)
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/samuelpanzera/site-pessoal-frontend:latest
+ContainerName=site-pessoal-frontend
+PublishPort=127.0.0.1:3100:80
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target default.target

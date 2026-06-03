@@ -1,0 +1,110 @@
+name: Build & Deploy Site Pessoal (Monorepo)
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'apps/**'
+      - 'infra/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch: {}
+
+env:
+  FRONTEND_IMAGE: ghcr.io/samuelpanzera/site-pessoal-frontend
+  API_IMAGE: ghcr.io/samuelpanzera/site-pessoal-api
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build em paralelo das duas imagens
+      - name: Build & Push Frontend
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: apps/frontend/Dockerfile
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            ${{ env.FRONTEND_IMAGE }}:latest
+            ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+
+      - name: Build & Push API Go
+        uses: docker/build-push-action@v7
+        with:
+          context: ./apps/backend
+          file: apps/backend/Dockerfile
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            ${{ env.API_IMAGE }}:latest
+            ${{ env.API_IMAGE }}:${{ github.sha }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: SCP Configurations to Temp
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: |
+            infra/frontend/site-pessoal-frontend.container
+            infra/backend/site-pessoal-api.container
+            infra/nginx/site-pessoal.conf
+          target: /tmp/site-pessoal-deploy/
+
+      - name: SSH Deploy & Atomically Validate Nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # 1. Copiar as configurações do Quadlet do Podman
+            sudo cp /tmp/site-pessoal-deploy/infra/frontend/site-pessoal-frontend.container /etc/containers/systemd/
+            sudo cp /tmp/site-pessoal-deploy/infra/backend/site-pessoal-api.container /etc/containers/systemd/
+
+            # 2. Atualizar as imagens e reiniciar os containers no Podman
+            sudo podman pull ${{ env.FRONTEND_IMAGE }}:latest
+            sudo podman pull ${{ env.API_IMAGE }}:latest
+            sudo systemctl daemon-reload
+            sudo systemctl restart site-pessoal-frontend
+            sudo systemctl restart site-pessoal-api
+
+            # 3. VALIDAÇÃO ATÔMICA DO NGINX (Prevenção de quebra global de VPS)
+            sudo cp /tmp/site-pessoal-deploy/infra/nginx/site-pessoal.conf /etc/nginx/conf.d/site-pessoal.conf
+            
+            if sudo nginx -t; then
+              echo "Nginx config is valid! Reloading..."
+              sudo systemctl reload nginx
+            else
+              echo "CRITICAL: Nginx validation failed! Rolling back config changes..."
+              sudo rm -f /etc/nginx/conf.d/site-pessoal.conf
+              rm -rf /tmp/site-pessoal-deploy/
+              exit 1
+            fi
+
+            # Limpeza do deploy
+            rm -rf /tmp/site-pessoal-deploy/
