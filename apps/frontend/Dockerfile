@@ -1,9 +1,10 @@
-FROM oven-sh/setup-bun:1.1.0-alpine AS builder
+FROM oven/bun:1.1.0-alpine AS builder
 WORKDIR /app
 
 # Copia arquivos de configuração do monorepo para instalar dependências
 COPY package.json bun.lock turbo.json ./
 COPY apps/frontend/package.json ./apps/frontend/
+COPY apps/backend/package.json ./apps/backend/
 
 RUN bun install --frozen-lockfile
 
