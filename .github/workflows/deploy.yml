@@ -79,10 +79,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: |
-            infra/frontend/site-pessoal-frontend.container
-            infra/backend/site-pessoal-api.container
-            infra/nginx/site-pessoal.conf
+          source: "infra/frontend/site-pessoal-frontend.container,infra/backend/site-pessoal-api.container,infra/nginx/site-pessoal.conf"
           target: /tmp/site-pessoal-deploy/
 
       - name: SSH Deploy & Atomically Validate Nginx
